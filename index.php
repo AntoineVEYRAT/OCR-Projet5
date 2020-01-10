@@ -41,7 +41,7 @@
 						require ('view/subscribe.php');
 					}
 				} else if ($_GET['action'] == 'logout') {
-						logout();
+					logout();
 				} 
 			} else {
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas!');
