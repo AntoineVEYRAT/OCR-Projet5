@@ -1,0 +1,136 @@
+/* 
+		GENERAL
+		   			*/
+body {
+	background-image: url('../img/background.png');
+	background-repeat: no-repeat;
+	width:100%;
+	height:100%;
+	line-height: 1!important;
+}
+
+.container-fluid {
+	padding:0!important;
+}
+
+.row {
+	margin:0!important;
+}
+
+.backcolor {
+	position:absolute;
+	background-color: rgba(255,255,255,0.5);
+	width:100%;
+	height:100%;
+}
+
+.yellow {
+	color:rgba(240,255,0,1);
+}
+
+@font-face {
+	font-family: 'Strongwild Demo';
+	src: url('Strongwild Demo.ttf');
+	font-weight: 400!important;
+	font-style: normal;
+}
+
+h1, h5 {
+	font-family: 'Strongwild Demo';
+	font-size: 3em!important;
+}
+
+/* 
+		HEADER 
+		 			*/
+header {
+	width:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+}
+
+#menu-bar-grey {
+	width:100%;
+	height:100px;
+	display:flex;
+	flex-direction: row;
+	background-color: rgba(50,50,50,1);
+}
+
+.logo-grey, .menu-grey {
+	margin:20px;
+	display: flex;
+	width:50%;
+	align-items: center;
+	color:white;
+}
+
+.menu-grey {
+	flex-direction: row-reverse;
+}
+
+.menu-grey a {
+	margin-right:15px;
+	text-decoration: none; 
+	color:white;
+}
+
+/* 
+		CONTENT
+					*/
+.content {
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(74,74,128,0.9);
+	padding:100px;
+}
+
+/* 
+		FOOTER
+					*/
+.footer {
+	position: absolute;
+	bottom:0;
+	background:rgba(50,50,50,1);
+	color:white;
+	width:100%;
+	text-align: center;
+}
+
+.footer p {
+	margin:0;
+}
+
+/* ************************ VIEW ZONE ***************************** */
+/* 
+		LOGIN
+					*/
+.session {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height:100%;
+	color: white;
+}
+
+.session h3 {
+	color:rgba(240,255,0,1);
+}
+
+
+.session a {
+	text-decoration: none;
+	color: rgba(46,46,80,1);
+}
+
+.session a:hover {
+	text-decoration: none;
+	color: white;
+}
