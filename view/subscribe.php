@@ -9,8 +9,8 @@
 					<input type="text" name="subscribe_name" id="subscribe_name" required>
 				</div>
 				<div class="session">
-					<label for="subscribe_pass">Email :</label>
-					<input type="email" name="subscribe_email" id="subscribe_email" required>
+					<label for="subscribe_mail">Email :</label>
+					<input type="email" name="subscribe_mail" id="subscribe_email" required>
 				</div>
 				<div class="session">
 					<label for="subscribe_pass">Password :</label>
