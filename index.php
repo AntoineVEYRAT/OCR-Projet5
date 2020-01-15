@@ -44,7 +44,7 @@
 					if (isset($_GET['add'])) {
 						addTicket($_POST['ticket'], $_SESSION['id']);
 					} else {
-						require ('index.php?action=open&app');
+						header ('Location: index.php?action=open&app');
 					}
 						
 				} else if ($_GET['action'] == 'logout') {

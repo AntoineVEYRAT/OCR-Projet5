@@ -121,7 +121,7 @@ header {
 .appli-content {
 	display:flex;
 	width:100%;
-	height:90%;
+	height:auto;
 	flex-direction: column;
 	align-items: center;
 	flex-basis: 100%;
@@ -147,7 +147,8 @@ header {
 .ticket {
 	display: block;
 	width: 400px;
-	height:300px;
+	min-height:350px;
+	height:auto;
 	margin-top:60px; 
 	margin-left:0; 
 	margin-right:0px; 
@@ -155,41 +156,98 @@ header {
 }
 
 .notepad {
-	background-color: rgba(255,255,255,1);
 	position:relative;
-	border-left: 8px solid rgba(50,50,50,0.5);
 	display:flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
+	height:auto;
 }
 
-.notepad p{
+.pagin p{
+	color: rgba(240,255,0,1);
+}
+
+.ticket-write p{
 	color: rgba(64,64,111,1);
 }
+
+.pagin {
+	display: flex;
+	flex-direction: row;
+}
+
+.pagin a {
+	text-decoration: none;
+	color:white;
+}
+
+.square {
+	border: solid 1px rgba(64,64,111,1);
+	width:20px;
+	height:20px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	margin:1px;
+}
+
+.square-current {
+	border: solid 1px rgba(240,255,0,1);
+}
+
+.square-hover:hover {
+	border: solid 1px rgba(240,255,0,1);
+	cursor: pointer;
+}
+
 .arrow-down {
 	width: 0; 
   	height: 0; 
-  	border-top: 18px solid transparent;
-  	border-bottom: 18px solid transparent;
-  	border-left: 20px solid rgba(50,50,50,0.5);
+  	border-left: 10px solid transparent;
+  	border-right: 10px solid transparent;
+  	border-top: 15px solid rgba(64,64,111,1);
   	position:absolute;
-  	top:40px;
-  	left:0;
+  	bottom:-17px;
+  	right:40px;
 }
 
 .noteform {
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align:center;
+}
+
+.noteform input {
+	display: none;
+}
+.submit {
+	color: rgba(64,64,111,1);
+	cursor: pointer;
+}
+
+.submit:hover {
+	color: white;
 }
 
 .noteform h5, p {
 	color: white;
 	margin:10px;
+	overflow:auto;
 }
 
 .ticket-write {
-	border: dashed 1px rgba(64,64,111,1);
-	padding:5px;
+	border: solid 3px rgba(64,64,111,1);
+	border-radius: 5px;
+	position: relative;
+	width:90%;
+	height:auto;
+	text-align: justify;
+	padding:10px;
+	margin-bottom:20px;
+	background-color: rgba(255,255,255,1);
 }
 
 #app-zone {

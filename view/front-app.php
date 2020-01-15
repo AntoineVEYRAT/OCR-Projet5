@@ -3,22 +3,30 @@
 	<div id="tickets">
 		<div class="ticket noteform">
 			<h5>Rédigez une note</h5>
-			<br>
 			<form method="POST" action="index.php?action=ticket&add">
 				<textarea id="ticket" name="ticket" rows="5" cols="35" maxlength="100">
-				</textarea>
-				<br>
-				<br>
-				<input type="submit" value="Enregistrer" />
+				</textarea><br>
+				<label><i class="fas fa-save fa-2x submit"></i><input type="submit" /></label>
 			</form>
 		</div>
 		<div class="ticket notepad">
-			<div class="arrow-down"></div>
 			<?php 
-				foreach ($result as $ticket) {
-					echo '<div class="ticket-write"><p>' . $ticket['date'] . '</p><p>' . $ticket['text'] . '</p></div>';
+				if ($noTicket == false) {
+					while ($ticket = $load->fetch()) {
+						echo '<div class="ticket-write" ><p>' . $ticket['date'] . '</p><p>' . $ticket['text'] . '</p><div class="arrow-down"></div></div>';
+					}
+				} else {
+					echo '<div class="ticket-write" ><p>Vous n\'avez aucune note.</p><div class="arrow-down"></div></div>';
 				}
-			?>
+				?><div class="pagin"><?php
+					for ($i=1; $i<=(ceil($nbTicket/3)); $i++) {
+						if($i == $currentPage) {
+							echo '<div class="square square-current"><p>' . $i . '</p></div>';
+						} else {
+							echo '<a href="?action=open&app&page=' . $i . '"><div class="square square-hover">' . $i . '</div></a> ';
+						}
+					}
+				?></div>
 		</div>
 	</div>
 	<div id="app-zone">
@@ -38,7 +46,13 @@
 			<p>Aujourd'hui, la note est de :</p>
 		</div>
 		<div class="help-module modules">
-			
+			<?php 
+				if ($_SESSION['status'] == 1) {
+					echo '<p>Actualisez pour voir les conseils !</p><br>';
+				} else {
+					echo '<p>Vous n\'êtes pas pêcheur Expert !</p>';
+				}
+			?>
 		</div>
 		<div class="profile-module modules">
 			<h3>PROFILE</h3>

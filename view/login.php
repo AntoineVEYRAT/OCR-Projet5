@@ -6,11 +6,11 @@
 			<br>
 			<form action="index.php?action=login&amp;verify" method="post" class="login-form">
 				<div class="session">
-					<label for="login_name">Identifiant :</label>
+					<label for="login_name">Identifiant</label>
 					<input type="text" name="login_name" id="login_name" required>
 				</div>
 				<div class="session">
-					<label for="login_pass">Password :</label>
+					<label for="login_pass">Password</label>
 					<input type="password" name="login_pass" id="login_pass" required>
 				</div>
 				<br>

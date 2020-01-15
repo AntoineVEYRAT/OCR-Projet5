@@ -79,14 +79,49 @@
 		}
 	}
 
-	// LOAD TICKET
+	// OPEN INTERFACE
 	function openInterface($member) {
 		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
-		$result = $ticket->loadTicket($member);
 
-		if ($result == false) {
-			throw new \Exception('Erreur SQL : Impossible de récuperer les notes !');
-		} else {
+		$nbTicket = $ticket->nbTicket($member);
+		if ($nbTicket == 0) {
+			$noTicket = true;
 			require('view/front-app.php');
+		} else {
+			$maxPerPage = 3;
+			$nbPage = ceil($nbTicket/$maxPerPage);
+			if (isset($_GET['page']) && !empty($_GET['page']) && ctype_digit($_GET['page']) == 1) {
+				if ($_GET['page'] > $nbPage || $_GET['page'] <= 0) {
+					$currentPage = 1;
+					$firstPage = ($currentPage-1)*$maxPerPage;
+					$load = $ticket->loadTicket($firstPage, $maxPerPage);
+					if ($load == false) {
+						throw new \Exception('Erreur SQL : Impossible de récuperer les notes ! ');
+					} else {
+						$noTicket = false;
+						require('view/front-app.php');
+					}
+				} else {
+					$currentPage = $_GET['page'];
+					$firstPage = ($currentPage-1)*$maxPerPage;
+					$load = $ticket->loadTicket($firstPage, $maxPerPage);
+					if ($load == false) {
+						throw new \Exception('Erreur SQL : Impossible de récuperer les notes !');
+					} else {
+						$noTicket = false;
+						require('view/front-app.php');
+					}
+				}
+			} else {
+				$currentPage = 1;
+				$firstPage = ($currentPage-1)*$maxPerPage;
+				$load = $ticket->loadTicket($firstPage, $maxPerPage);
+				if ($load == false) {
+					throw new \Exception('Erreur SQL : Impossible de récuperer les notes !');
+				} else {
+					$noTicket = false;
+					require('view/front-app.php');
+				}
+			}
 		}
 	}
