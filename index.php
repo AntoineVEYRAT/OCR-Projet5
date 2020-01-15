@@ -7,7 +7,7 @@
 				if ($_GET['action'] == 'open') {
 					if (isset($_GET['app'])) {
 						if (isset($_SESSION['id'])) {
-							require ('view/front-app.php');
+							openInterface($_SESSION['id']);
 						} else {
 							require ('view/login.php');
 						}
@@ -40,9 +40,17 @@
 					} else {
 						require ('view/subscribe.php');
 					}
+				} else if ($_GET['action'] == 'ticket') {
+					if (isset($_GET['add'])) {
+						addTicket($_POST['ticket'], $_SESSION['id']);
+					} else {
+						require ('index.php?action=open&app');
+					}
+						
 				} else if ($_GET['action'] == 'logout') {
 					logout();
 				} 
+					
 			} else {
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas!');
 			}

@@ -2,6 +2,7 @@
 	// Chargement des classes
 	require_once('model/Manager.php');
 	require_once('model/Session.php');
+	require_once('model/Ticket.php');
 
 	// LOGIN
 	function login($name, $pass) {
@@ -35,7 +36,7 @@
 		    		$_SESSION['long'] = $rLong;
 		    		$_SESSION['expStop'] = $rExpertStop;
 
-					header('Location: index.php');
+					header('Location: index.php?action=open&app');
 				}else {
 					throw new \Exception('Erreur : Mot de passe erroné !');
 				}
@@ -64,4 +65,28 @@
 		$_SESSION = array();
 		session_destroy();
 		header('Location: index.php');
+	}
+
+	// ADD TICKET
+	function addTicket($text, $member) {
+		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
+		$result = $ticket->addTicket($text, $member);
+
+		if ($result == false) {
+			throw new \Exception('Erreur SQL : Ajout de la note impossible !');
+		} else {
+			header('Location: index.php?action=open&app');
+		}
+	}
+
+	// LOAD TICKET
+	function openInterface($member) {
+		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
+		$result = $ticket->loadTicket($member);
+
+		if ($result == false) {
+			throw new \Exception('Erreur SQL : Impossible de récuperer les notes !');
+		} else {
+			require('view/front-app.php');
+		}
 	}

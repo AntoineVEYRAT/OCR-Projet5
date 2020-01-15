@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<div class="content">
 	<section>
 		<div class="session">
 			<h3>INSCRIPTION</h3>
@@ -25,6 +26,7 @@
 			<a href="index.php?action=login">Je possède déjà un compte !</a>
 		</div>
 	</section>
+</div>
 <?php 
 	$content = ob_get_clean();
 	require('template.php'); 

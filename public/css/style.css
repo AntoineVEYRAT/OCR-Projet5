@@ -203,7 +203,7 @@ section {
 }
 
 .about-us-img {
-	max-width: 35%
+	width: 40%;
 }
 
 .about-us-img img{
@@ -213,7 +213,23 @@ section {
 .about-us-text {
 	text-align: right;
 	border-right:6px solid rgba(74,74,128,1);
-	max-width: 35%;
+	width: 40%;
+}
+
+@media screen and (max-width: 1000px) {
+	.about-us-img {
+		width: 80%;
+	}
+
+	.about-us-img img{
+		max-width: 80%;
+	}
+
+	.about-us-text {
+		text-align: right;
+		border-right:6px solid rgba(74,74,128,1);
+		width: 80%;
+	}
 }
 
 .about-us-text p, h2 {
@@ -299,7 +315,7 @@ section {
 }
 
 .offers-bar-block {
-	margin-top: 60px;
+	margin-top: 100px;
 	width:80%;
 	display: flex;
 	flex-direction: row;
@@ -309,10 +325,10 @@ section {
 
 .offers-block {
 	background-color:rgba(46,46,80,1);
-	min-height:300px;
+	min-height:400px;
 	min-width:400px;
 	position:relative;
-	margin-bottom:60px;
+	margin-bottom:100px;
 }
 
 .offers-block img {
@@ -340,13 +356,38 @@ section {
 	font-size: 2em;
 }
 
-.footer {
-	background:rgba(50,50,50,1);
-	color:white;
-	width:100%;
+#stats-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
+	padding:15px;
+}
+
+#stats-bar h4 {
+	margin:0;
+	padding:0;
+	font-size: 1.2em;
+	color:rgba(74,74,128,1);
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	background:rgba(50,50,50,1);
+	width:100%;
+	padding:5px;
+	align-items: center;
+	justify-content: center;
 }
 
 .footer p {
 	margin:0;
+	color:white;
+}
+
+footer a {
+	margin:0;
+	padding:0;
 }

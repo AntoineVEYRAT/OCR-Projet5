@@ -1,27 +1,13 @@
 /* 
 		GENERAL
 		   			*/
-body {
-	background-image: url('../img/background.png');
-	background-repeat: no-repeat;
+body, .container{
 	width:100%;
 	height:100%;
-	line-height: 1!important;
-}
-
-.container-fluid {
-	padding:0!important;
-}
-
-.row {
-	margin:0!important;
-}
-
-.backcolor {
-	position:absolute;
-	background-color: rgba(255,255,255,0.5);
-	width:100%;
-	height:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	flex-direction: column;
 }
 
 .yellow {
@@ -30,7 +16,7 @@ body {
 
 @font-face {
 	font-family: 'Strongwild Demo';
-	src: url('Strongwild Demo.ttf');
+	src: url('../font/Strongwild Demo.ttf');
 	font-weight: 400!important;
 	font-style: normal;
 }
@@ -38,6 +24,7 @@ body {
 h1, h5 {
 	font-family: 'Strongwild Demo';
 	font-size: 3em!important;
+	font-weight:500;
 }
 
 /* 
@@ -48,6 +35,7 @@ header {
 	margin:0;
 	padding:0;
 	display:flex;
+	height:auto;
 }
 
 #menu-bar-grey {
@@ -74,8 +62,10 @@ header {
 	margin-right:15px;
 	text-decoration: none; 
 	color:white;
+	font-family: 'Arial';
 }
 
+/* ************************ VIEW ZONE ***************************** */
 /* 
 		CONTENT
 					*/
@@ -88,29 +78,13 @@ header {
 	justify-content: center;
 	align-items: center;
 	background-color: rgba(74,74,128,0.9);
-	padding:100px;
+	padding-top:100px;
+	padding-bottom:100px;
 }
 
 /* 
-		FOOTER
-					*/
-.footer {
-	position: absolute;
-	bottom:0;
-	background:rgba(50,50,50,1);
-	color:white;
-	width:100%;
-	text-align: center;
-}
-
-.footer p {
-	margin:0;
-}
-
-/* ************************ VIEW ZONE ***************************** */
-/* 
-		LOGIN
-					*/
+		LOGIN & SUBSCRIBE
+							*/
 .session {
 	display: flex;
 	flex-direction: column;
@@ -128,9 +102,176 @@ header {
 .session a {
 	text-decoration: none;
 	color: rgba(46,46,80,1);
+	font-family: 'Arial';
 }
 
 .session a:hover {
 	text-decoration: none;
 	color: white;
+	font-family: 'Arial';
+}
+
+.session label {
+	font-family: 'Arial';
+}
+/* 
+		INTERFACE APP
+							*/
+
+.appli-content {
+	display:flex;
+	width:100%;
+	height:90%;
+	flex-direction: column;
+	align-items: center;
+	flex-basis: 100%;
+	flex-grow: 1;
+	justify-content: space-between;
+}
+
+.appli-content p, h3, a{
+	font-family: 'Arial';
+	margin:2px;
+}
+
+#tickets {
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	width:100%;
+	height:auto;
+	justify-content: center;
+	background-color: rgba(74,74,128,0.9);
+}
+
+.ticket {
+	display: block;
+	width: 400px;
+	height:300px;
+	margin-top:60px; 
+	margin-left:0; 
+	margin-right:0px; 
+	margin-bottom:60px;
+}
+
+.notepad {
+	background-color: rgba(255,255,255,1);
+	position:relative;
+	border-left: 8px solid rgba(50,50,50,0.5);
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.notepad p{
+	color: rgba(64,64,111,1);
+}
+.arrow-down {
+	width: 0; 
+  	height: 0; 
+  	border-top: 18px solid transparent;
+  	border-bottom: 18px solid transparent;
+  	border-left: 20px solid rgba(50,50,50,0.5);
+  	position:absolute;
+  	top:40px;
+  	left:0;
+}
+
+.noteform {
+	text-align: center;
+}
+
+.noteform h5, p {
+	color: white;
+	margin:10px;
+}
+
+.ticket-write {
+	border: dashed 1px rgba(64,64,111,1);
+	padding:5px;
+}
+
+#app-zone {
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width:100%;
+	height:auto;
+}
+
+#app-zone p {
+	color:white;
+}
+
+.modules {
+	display:flex;
+	position:relative;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height:400px;
+	min-width: 400px;
+	width:25%;
+}
+
+.modules a {
+	color: rgba(240,255,0,1);
+	text-decoration: none;
+	margin-top: 10px;
+}
+
+.status-module {
+	background-color: rgba(46,46,80,1);
+}
+
+.note-module {
+	background-color: rgba(100,100,172,1);
+}
+
+.help-module {
+	background-color: rgba(74,74,128,1);
+}
+
+.profile-module {
+	background-color: rgba(64,64,111,1);
+	text-align: left;
+}
+
+@media screen and (max-width: 640px) {
+	.ticket {
+		width:100%;
+		margin:0;
+	}
+	.modules {
+		width:100%;
+		min-width: 300px;
+	}
+	footer {
+		margin:0;
+	}
+}
+/* ************************ FOOTER ***************************** */
+/* 
+		FOOTER
+					*/
+
+footer {
+	margin:0;
+	padding:0;
+	width:100%;
+	margin-top: 20px;
+}
+
+.footer {
+	text-align: center;
+}
+
+.footer p, a {
+	margin:0;
+	padding:0;
+	font-family: 'Arial';
+	color: grey;
 }
