@@ -32,6 +32,7 @@
 							subscribe(
 								$_POST['subscribe_name'], 
 								$_POST['subscribe_mail'], 
+								$_POST['subscribe_city'],
 								$_POST['subscribe_pass']
 							);
 						} else {
@@ -43,6 +44,16 @@
 				} else if ($_GET['action'] == 'ticket') {
 					if (isset($_GET['add'])) {
 						addTicket($_POST['ticket'], $_SESSION['id']);
+					} else if (isset($_GET['delete'])) {
+						if (isset($_GET['id'])) {
+							if (isset($_GET['confirm'])) {
+									deleteTicket($_GET['id']);
+								} else {
+									confirm($_GET['id']);
+								}
+						} else {
+							throw new Exception('Error : Désolé, ce ticket n\'existe pas !');
+						}
 					} else {
 						header ('Location: index.php?action=open&app');
 					}

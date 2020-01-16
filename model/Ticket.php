@@ -15,6 +15,15 @@ class Ticket extends Manager {
 		return $req;	
 	}
 
+	// Suppression note
+    public function deleteTicket($id) {
+		$bdd = $this->dbConnect();
+		$req = $bdd->prepare('DELETE FROM tickets WHERE id = ?');
+		$req->execute(array($id));
+
+		return $req;	
+	}
+
 	// Récuperer les notes
     public function loadTicket($firstPage, $maxPerPage) {
 		$bdd = $this->dbConnect();

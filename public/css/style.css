@@ -24,8 +24,22 @@ body {
 	width:100%;
 	height:auto;
 	line-height: 1!important;
+	position:relative;
 }
 
+.arrow {
+	position:fixed;
+	z-index: 3;
+	right:30px;
+	bottom:30px;
+	background-color: white;
+	padding:3px;
+	border-radius: 8px;
+}
+
+.arrow a {
+	color:rgba(50,50,50,1);
+}
 
 .row {
 	margin:0!important;
@@ -70,7 +84,7 @@ header {
 .menu a:hover {
 	margin-right:15px;
 	text-decoration: none; 
-	color:rgba(50,50,50,1);;
+	color:rgba(50,50,50,1);
 }
 
 .welcom-box {
@@ -111,24 +125,34 @@ header {
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(74,74,128,1);
+	transition: transform .2s;
+	color:rgba(46,46,80,1);
 }
 
 .condition p {
 	font-family: 'Strongwild Demo';
-	color:white;
 	margin:0!important;
 	font-size: 2em!important;
 }
 
-.condition p:hover {
+.condition:hover {
+	transform: scale(1.1);
 	color:rgba(240,255,0,1);
 }
 
+.welcom-box a{
+  -webkit-animation-duration: 1.4s;
+  animation-duration: 1.4s;
+  -webkit-animation-name: fadein;
+  animation-name: fadein;
+}
+
 .welcom-box a:hover {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-name: shake;
-  animation-name: shake;
+	-webkit-animation-duration: .7s;
+	animation-duration: .7s;
+	-webkit-animation-name: scaleX;
+	animation-name: scaleX;
+	transform :scale(1.2);
 }
 
 @media screen and (max-width: 520px) {
@@ -138,54 +162,42 @@ header {
 	}
 }
 
-@-webkit-keyframes shake {
-  from,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-    transform: translate3d(-10px, 0, 0);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate3d(10px, 0, 0);
-  }
+@-webkit-keyframes scaleX {
+	0% {
+	    transform :scale(1);
+  	}
+  	25% {
+	    transform :scale(1.1);
+  	}
+  	50% {
+	    transform :scale(1);
+  	}
+  	100% {
+	    transform :scale(1.2);
+  	}
 }
 
-@keyframes shake {
-  from,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    -webkit-transform: translate3d(-10px, 0, 0);
-    transform: translate3d(-10px, 0, 0);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate3d(10px, 0, 0);
-  }
+@-webkit-keyframes fadein {
+	0% {
+	    -webkit-transform: translateY(-20px);
+	    transform: translateY(-20px);
+	    opacity:0;
+  	}
+  	50% {
+  		-webkit-transform: translateY(-20px);
+    	transform: translateY(-20px);
+    	opacity:0;
+  	}
+  	70% {
+  		-webkit-transform: translateY(10px);
+    	transform: translateY(10px);
+	    opacity:0.5;
+  	}
+  	100% {
+	    -webkit-transform: translateY(0);
+	    transform: translateY(0);
+	    opacity:1;
+  	}
 }
 
 section {
@@ -325,8 +337,8 @@ section {
 
 .offers-block {
 	background-color:rgba(46,46,80,1);
-	min-height:400px;
-	min-width:400px;
+	min-height:320px;
+	min-width:320px;
 	position:relative;
 	margin-bottom:100px;
 }

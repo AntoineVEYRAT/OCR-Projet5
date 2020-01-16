@@ -18,4 +18,7 @@
 			?>
 		</div>
 	</body>
+	<script type="text/javascript" src="./js/ajax.js"></script>
+	<script type="text/javascript" src="./js/station.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
 </html>

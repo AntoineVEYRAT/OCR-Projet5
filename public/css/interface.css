@@ -115,6 +115,41 @@ header {
 	font-family: 'Arial';
 }
 /* 
+		CONFIRM PAGE
+							*/
+.confirm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.confirm-zone {
+	margin:25px;
+	color: white;
+}
+
+.confirm a {
+	text-decoration: none;
+}
+
+.confirm .yes:hover {
+	color:red;
+	font-weight: 700;
+	border: solid 1px red;
+}
+
+.confirm .back, .yes {
+	color:white;
+	border: solid 1px white;
+	padding:5px;
+}
+.confirm .back:hover {
+	color:rgba(240,255,0,1);
+	border: solid 1px rgba(240,255,0,1);
+	padding:5px;
+}
+/* 
 		INTERFACE APP
 							*/
 
@@ -212,6 +247,17 @@ header {
   	right:40px;
 }
 
+.cross {
+	position:absolute;
+	color:rgba(50,50,50,0.3);
+  	top:10px;
+  	right:10px;
+}
+
+.cross:hover {
+	color:rgba(50,50,50,0.5);
+}
+
 .noteform {
 	display: flex;
 	flex-direction: column;
@@ -287,6 +333,11 @@ header {
 
 .note-module {
 	background-color: rgba(100,100,172,1);
+}
+
+.note-module h5{
+	color: white;
+	font-family: 'Arial';
 }
 
 .help-module {
