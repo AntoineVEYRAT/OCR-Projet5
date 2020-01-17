@@ -13,6 +13,9 @@
 				($errorMessage === 'Error : Aucunes données dans le formulaire !')) {
 					echo $errorMessage;
 					echo '</h4><br><a href="index.php?action=subscribe">Retour</a>';
+			} else if ($errorMessage === 'Error : Le nom de ville n\'est pas correct !') {
+				echo $errorMessage;
+				echo '</h4><br><a href="index.php?action=update&city">Réessayer</a>';
 			} else {
 				echo $errorMessage;
 				echo '</h4><br><a href="index.php"> Retourner à l\'accueil</a>';

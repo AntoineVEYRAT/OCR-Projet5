@@ -173,6 +173,20 @@
 		}
 	}
 
+	// UPDATE CITY
+	function updateCity($city) {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+
+		$session->updateCity($_SESSION['name'], $city);
+
+		if ($session === false) {
+			throw new \Exception('Erreur SQL : Impossible de changer votre nom de ville !');
+		} else {
+			$_SESSION['city'] = $city;
+			header('Location: index.php?action=open&app');
+		}
+	}
+
 	// VERIFY
 	function confirm($id) {
 		$idTicket = $id;

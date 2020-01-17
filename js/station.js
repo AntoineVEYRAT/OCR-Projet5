@@ -131,6 +131,12 @@ class Station{
             document.getElementById('resultWeather').textContent = result.toFixed(1);
             document.getElementById('resultCityName').textContent = weather.location.name;
             document.getElementById('resultCountryName').textContent = weather.location.country;
+
+            document.getElementById('weather').textContent = (Number(weatherCodeN)/2).toFixed(1);
+            document.getElementById('temp').textContent = (Number(tempN)/2).toFixed(1);
+            document.getElementById('rain').textContent = (Number(precipN)/2).toFixed(1);
+            document.getElementById('wind').textContent = (Number(windSpeedN)/2).toFixed(1);
+            document.getElementById('visibility').textContent = (Number(visibN)/2).toFixed(1);
         });
     }
 }

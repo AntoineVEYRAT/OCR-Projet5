@@ -60,4 +60,17 @@ class Session extends Manager {
 
         return $result;
 	}
+
+	// Update city
+	public function updateCity($name, $city) {
+		$bdd = $this->dbConnect();
+		$update = $bdd->prepare('UPDATE members SET city= :city WHERE name = :name');
+        $update->execute(array(
+        	'city' => $city,
+        	'name' => $name
+        )); 
+        $result = $update->fetch();
+
+        return $result;
+	}
 }

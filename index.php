@@ -74,8 +74,26 @@
 						
 				} else if ($_GET['action'] == 'logout') {
 					logout();
-				} 
-					
+
+				} else if ($_GET['action'] == 'update') {
+					if (isset($_GET['city'])) {
+						if (isset($_GET['verify'])) {
+							if (isset($_POST['update_city'])) {
+								$_POST['update_city'] = htmlspecialchars($_POST['update_city']);
+								updateCity($_POST['update_city']);
+							} else {
+								throw new Exception('Error : Le nom de ville n\'est pas correct !');
+							}
+						} else {
+							require ('view/update-city.php');
+						}
+					} else if (isset($_GET['pass'])) {
+
+					} else {
+						header ('Location: index.php?action=open&app');
+					}	
+				}
+
 			} else {
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
 			}

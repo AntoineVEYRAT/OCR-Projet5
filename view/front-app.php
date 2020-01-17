@@ -71,9 +71,15 @@
 		<div class="help-module modules">
 			<?php 
 				if($_SESSION['status'] == 1):
-					echo '<p>Actualisez pour voir les conseils !</p><br>';
+			?>	
+					<p><i class="fas fa-2x fa-cloud-sun"></i> Météo générale: <span id="weather"></span>/10</p>
+					<p><i class="fas fa-2x fa-thermometer-three-quarters"></i> Température: <span id="temp"></span>/10</p>
+					<p><i class="fas fa-2x fa-wind"></i> Force du vent: <span id="wind"></span>/10</p>
+					<p><i class="fas fa-2x fa-cloud-rain"></i> Précipitations: <span id="rain"></span>/10</p>
+					<p><i class="fas fa-2x fa-eye"></i> Visibilité: <span id="visibility"></span>/10</p>
+			<?php
 				else:
-					echo '<p>Vous n\'êtes pas pêcheur Expert !</p>';
+					echo '<p>Vous n\'êtes pas pêcheur Expert !</p><p><a href="index.php#offers-bar">Devenir pêcheur Expert !</a></p>';
 				endif;
 			?>
 		</div>
@@ -82,10 +88,11 @@
 			<br>
 			<?php 
 				echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
-				echo '<p>Mot de passe : ********* (<a>Changer</a>)</p>';
 				echo '<p>Email : ' . $_SESSION['email'] . '</p>';
-				echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a>Changer</a>)</p>'
+				echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
+				echo '<p>Mot de passe (<a>Changer</a>)</p>';
 			?>
+			<br>
 			<a href="index.php?action=logout">Se déconnecter</a>
 		</div>
 	</div>
