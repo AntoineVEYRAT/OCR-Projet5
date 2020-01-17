@@ -19,6 +19,7 @@ class Station{
             let windSpeedN;
             let visibN;
 
+            // IF Cold
             if (Number(temp) < 0) {
                 tempN = 10;
             } else if (0 < Number(temp) < 15) {
@@ -29,6 +30,7 @@ class Station{
                 tempN = 8;
             }
 
+            // IF Rain
             if (Number(precip) == 0) {
                 precipN = 20;
             } else if (0 < Number(precip) < 33) {
@@ -39,6 +41,7 @@ class Station{
                 precipN = 10;
             }
 
+            // IF Cloudy
             if (Number(weatherCode) >= 200) {
                 if (Number(weatherCode) == 248) {
                     weatherCodeN = 13;
@@ -67,9 +70,64 @@ class Station{
                 }
             }
 
+            // IF Wind
+            if ((Number(windSpeed) >= 0) && (Number(windSpeed) <= 200)) {
+                if (Number(windSpeed) < 50) {
+                    if (Number(windSpeed) < 25){
+                        if (Number(windSpeed) < 12) {
+                            windSpeedN = 19;
+                        } else {
+                            windSpeedN = 16;
+                        }
+                    } else if (Number(windSpeed) < 37) {
+                        windSpeedN = 15;
+                    } else {
+                        windSpeedN = 14;
+                    }
+                } else if (Number(windSpeed) < 100) {
+                    if (Number(windSpeed) < 75){
+                        if (Number(windSpeed) < 62) {
+                            windSpeedN = 13;
+                        } else {
+                            windSpeedN = 12;
+                        }
+                    } else if (Number(windSpeed) < 87) {
+                        windSpeedN = 11;
+                    } else {
+                        windSpeedN = 9;
+                    }
+                } else if (Number(windSpeed) >= 100) {
+                    if (Number(windSpeed) < 130){
+                        if (Number(windSpeed) < 115) {
+                            windSpeedN = 6;
+                        } else {
+                            windSpeedN = 4;
+                        }
+                    } else if (Number(windSpeed) < 150) {
+                        windSpeedN = 1;
+                    } else {
+                        windSpeedN = 0;
+                    }
+                }
+            } else {
+                windSpeedN = 10;
+            }
 
-            let result = ((Number(tempN) + Number(precipN) + Number(weatherCodeN))/3)/2
+            // IF Visibility
+            if (Number(visib) < 3) {
+                visibN = 3;
+            } else if (Number(visib) < 6) {
+                visibN = 7;
+            } else if (Number(visib) < 9) {
+                visibN = 11;
+            } else if (Number(visib) < 12) {
+                visibN = 15;
+            } else {
+                visibN = 19;
+            }
 
+            let result = ((Number(tempN) + Number(precipN) + Number(weatherCodeN) + Number(windSpeedN) + Number(visibN))/5)/2
+            console.log(visib + ' ' + visibN);
             document.getElementById('resultWeather').textContent = result.toFixed(1);
             document.getElementById('resultCityName').textContent = weather.location.name;
             document.getElementById('resultCountryName').textContent = weather.location.country;

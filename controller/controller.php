@@ -48,11 +48,15 @@
 		if ($result != 0) {
 			throw new \Exception('Erreur : Cet identifiant est déjà pris, veuillez en choisir un nouveau !');
 		} else {
-			$insert = $session->subscribeInsert($name, $mail, $city, $pass);
-			if ($insert === false) {
-				throw new \Exception('Erreur SQL: Impossible d\'enregistrer vos données !');
+			if ($pass == $name) {
+				throw new \Exception('Erreur : Vous ne devez pas utiliser un mot de passe similaire à votre identifiant !');
 			} else {
-				header('Location: index.php');
+				$insert = $session->subscribeInsert($name, $mail, $city, $pass);
+				if ($insert === false) {
+					throw new \Exception('Erreur SQL: Impossible d\'enregistrer vos données !');
+				} else {
+					header('Location: index.php');
+				}
 			}
 		}
 	}
@@ -125,10 +129,7 @@
 			throw new \Exception('Erreur SQL: Vous devez être connecté !');
 		}
 
-
-
 		$nbTicket = $ticket->nbTicket($member);
-
 
 		if ($nbTicket == 0) {
 			$noTicket = true;

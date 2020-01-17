@@ -19,7 +19,8 @@
 				else if ($_GET['action'] == 'login') {
 					if (isset($_GET['verify'])) {
 						if (!empty($_POST)) {
-							login($_POST['login_name'], $_POST['login_pass']);
+							$_POST['login_name'] = strtolower($_POST['login_name']);
+							login(htmlspecialchars($_POST['login_name']), htmlspecialchars($_POST['login_pass']));
 						} else {
 							throw new Exception('Error : Aucunes données dans le formulaire !');
 						}
@@ -29,12 +30,25 @@
 				} else if ($_GET['action'] == 'subscribe') {
 					if (isset($_GET['verify'])) {
 						if (!empty($_POST)) {
-							subscribe(
-								$_POST['subscribe_name'], 
-								$_POST['subscribe_mail'], 
-								$_POST['subscribe_city'],
-								$_POST['subscribe_pass']
-							);
+							if (isset($_POST['subscribe_name']) 
+							&& isset($_POST['subscribe_mail']) 
+							&& isset($_POST['subscribe_city'])
+							&& isset($_POST['subscribe_pass'])
+							) {
+								if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['subscribe_mail'])) {
+									$_POST['subscribe_name'] = strtolower($_POST['subscribe_name']);
+									subscribe(
+										htmlspecialchars($_POST['subscribe_name']), 
+										htmlspecialchars($_POST['subscribe_mail']), 
+										htmlspecialchars($_POST['subscribe_city']),
+										htmlspecialchars($_POST['subscribe_pass'])
+									);
+								} else {
+									throw new Exception('Error : Email invalide !');
+								}
+							} else {
+								throw new Exception('Error : Certaine(s) donnée(s) sont absentes !');
+							}
 						} else {
 							throw new Exception('Error : Aucunes données dans le formulaire !');
 						}
@@ -43,7 +57,7 @@
 					}
 				} else if ($_GET['action'] == 'ticket') {
 					if (isset($_GET['add'])) {
-						addTicket($_POST['ticket'], $_SESSION['id']);
+						addTicket(htmlspecialchars($_POST['ticket']), $_SESSION['id']);
 					} else if (isset($_GET['delete'])) {
 						if (isset($_GET['id'])) {
 							if (isset($_GET['confirm'])) {
@@ -63,7 +77,7 @@
 				} 
 					
 			} else {
-				throw new Exception('Erreur : L\'url recherchée n\'existe pas!');
+				throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
 			}
 		} else {
 			require ('view/home.php');
