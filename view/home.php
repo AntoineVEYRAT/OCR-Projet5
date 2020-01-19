@@ -16,7 +16,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	</head>
 	<body>
-		<div class="arrow"><a href="#"><i class="fas fa-chevron-up fa-2x"></i></a></div>
+		<div class="arrow"><a href="#" class="js-scrollTop"><i class="fas fa-chevron-up fa-2x"></i></a></div>
 		<div class="container-fluid">
 			<header>
 				<div id="menu-bar">

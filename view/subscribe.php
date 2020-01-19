@@ -21,9 +21,8 @@
 					<label for="subscribe_pass">Password</label>
 					<input type="password" minlength="6" name="subscribe_pass" id="subscribe_pass" required>
 				</div>
-				<br>
 				<div class="session">
-					<input type="submit" value="S'enregistrer">
+					<label class="button-form">S'enregistrer<input type="submit" value="SignIn" class="input-form"></label>
 				</div>
 			</form>
 			<br>

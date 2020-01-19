@@ -68,15 +68,18 @@
 			<p><span id="resultCityName"></span></p>
 			<p>(<span id="resultCountryName"></span>)</p>
 		</div>
-		<div class="help-module modules">
+		<div class="expert-module modules">
 			<?php 
 				if($_SESSION['status'] == 1):
 			?>	
-					<p><i class="fas fa-2x fa-cloud-sun"></i> Météo générale: <span id="weather"></span>/10</p>
-					<p><i class="fas fa-2x fa-thermometer-three-quarters"></i> Température: <span id="temp"></span>/10</p>
-					<p><i class="fas fa-2x fa-wind"></i> Force du vent: <span id="wind"></span>/10</p>
-					<p><i class="fas fa-2x fa-cloud-rain"></i> Précipitations: <span id="rain"></span>/10</p>
-					<p><i class="fas fa-2x fa-eye"></i> Visibilité: <span id="visibility"></span>/10</p>
+				<div class="expert-stats">
+					<h3 class="yellow">Les indices d'expert</h3>
+					<p><span class="stat"><i class="fas fa-2x fa-cloud-sun"></i></span> <span id="weather"></span></p>
+					<p><span class="stat"><i class="fas fa-2x fa-thermometer-three-quarters"></i></span> <span id="temp"></span></p>
+					<p><span class="stat"><i class="fas fa-2x fa-wind"></i></span> <span id="wind"></span></p>
+					<p><span class="stat"><i class="fas fa-2x fa-cloud-rain"></i></span> <span id="rain"></span></p>
+					<p><span class="stat"><i class="fas fa-2x fa-eye"></i></span> <span id="visibility"></span></p>
+				</div>
 			<?php
 				else:
 					echo '<p>Vous n\'êtes pas pêcheur Expert !</p><p><a href="index.php#offers-bar">Devenir pêcheur Expert !</a></p>';
@@ -86,12 +89,26 @@
 		<div class="profile-module modules">
 			<h3>PROFILE</h3>
 			<br>
-			<?php 
-				echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
-				echo '<p>Email : ' . $_SESSION['email'] . '</p>';
-				echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
-				echo '<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>';
-			?>
+			<div id="avatar">
+				<?php 
+					if(isset($_SESSION['img'])):
+						echo '<img src="/storage/img/' . $_SESSION['img'] . '" alt="' . $_SESSION['img'] . '" />';
+						echo '<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>';
+					else:
+						echo '<img src="./storage/img/default.png" alt="default_avatar" />';
+						echo '<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>';
+					endif;
+				?>
+			</div>
+			<br>
+			<div class="desc">
+				<?php 
+					echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
+					echo '<p>Email : ' . $_SESSION['email'] . '</p>';
+					echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
+					echo '<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>';
+				?>
+			</div>
 			<br>
 			<a href="index.php?action=logout">Se déconnecter</a>
 		</div>

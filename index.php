@@ -73,13 +73,19 @@
 					}
 						
 				} else if ($_GET['action'] == 'logout') {
-					logout();
+					if (isset($_GET['redir'])) {
+							$message = 'Vous avez bien été déconnecté !';
+							require ('view/action-confirm.php');
+							header('refresh:3;url=index.php');
+					} else {
+						logout();
+					}
 
 				} else if ($_GET['action'] == 'update') {
 					if (isset($_GET['city'])) {
 						if (isset($_GET['redir'])) {
 							$message = 'Votre ville a bien été modifié !';
-							require ('view/aConfirm.php');
+							require ('view/action-confirm.php');
 							header('refresh:5;url=index.php?action=open&app');
 						} else if (isset($_GET['verify'])) {
 							if (isset($_POST['update_city'])) {
@@ -93,7 +99,8 @@
 						}
 					} else if (isset($_GET['pass'])) {
 						if (isset($_GET['redir'])) {
-							echo 'Votre mot de passe a bien été modifié !';
+							$message = 'Votre mot de passe a bien été modifié !';
+							require ('view/action-confirm.php');
 							header('refresh:5;url=index.php?action=open&app');
 						}
 						else if (isset($_GET['verify'])) {
@@ -111,6 +118,20 @@
 					} else {
 						header ('Location: index.php?action=open&app');
 					}	
+				} else if ($_GET['action'] == 'upload') {
+					if (isset($_GET['redir'])) {
+							$message = 'Votre avatar a bien été modifié !';
+							require ('view/action-confirm.php');
+							header('refresh:3;url=index.php?action=open&app');
+					} else if (isset($_GET['verify'])) {
+						if (isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])){
+							upload();
+						} else {
+							throw new Exception('Erreur : Aucun fichier à uploader !');
+						}
+					} else {
+						require ('view/upload.php');
+					}
 				}
 
 			} else {

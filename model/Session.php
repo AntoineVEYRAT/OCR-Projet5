@@ -94,4 +94,16 @@ class Session extends Manager {
 
         return $result;	
 	}
+
+	// Upload img profile
+	public function uploadImg($ext, $id) {
+		$bdd = $this->dbConnect();
+		$upload = $bdd->prepare('UPDATE members SET img = :img WHERE id = :id');
+        $result = $upload->execute(array(
+        	'img' => $_SESSION['id'].".".$ext,
+        	'id' => $_SESSION['id']
+        )); 
+
+        return $result;	
+	}
 }

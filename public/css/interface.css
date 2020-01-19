@@ -65,6 +65,10 @@ header {
 	font-family: 'Arial';
 }
 
+.menu-grey a:hover {
+	color:rgba(240,255,0,1);
+}
+
 /* ************************ VIEW ZONE ***************************** */
 /* 
 		CONTENT
@@ -340,13 +344,75 @@ header {
 	font-family: 'Arial';
 }
 
-.help-module {
+.expert-module {
 	background-color: rgba(74,74,128,1);
+	text-align: left;
+}
+
+.expert-stats .stat{
+	width:50px;
+	height:50px;
+	display:inline-flex;
+	justify-content: center;
+	align-items: center;
+	border:1px solid rgba(240,255,0,1);
+}
+
+.stat i:hover {
+	color:rgba(240,255,0,1);
 }
 
 .profile-module {
 	background-color: rgba(64,64,111,1);
-	text-align: left;
+}
+
+.profile-module h3 {
+	color: white;
+}
+
+#avatar {
+	border: 1px solid white;
+	position:relative;
+	width:100px;
+	height:120px;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#avatar img {
+	width: 95px;
+	height:115px;
+}
+
+.hover-hidden {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100px;
+	height:120px;
+	opacity: 0;
+	background-color: rgba(64,64,111,0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hover-hidden a {
+	text-decoration: none;
+	padding:2px;
+	color:rgba(240,255,0,1);
+	border: 1px solid white;
+	background-color: rgba(64,64,111,1);
+}
+
+.hover-hidden a:hover {
+	border: 1px solid rgba(240,255,0,1);
+	color:rgba(240,255,0,1);
+}
+
+.hover-hidden:hover {
+	opacity: 1;
 }
 
 @media screen and (max-width: 640px) {
@@ -362,6 +428,31 @@ header {
 		margin:0;
 	}
 }
+
+/* ************************ FORM ***************************** */
+/* 
+		FORM
+					*/
+
+.session {
+	margin-bottom: 10px;
+}
+.input-form {
+	display: none;
+}
+
+.button-form {
+	padding:5px;
+	border: 1px solid white;
+	cursor: pointer;
+}
+
+.button-form:hover {
+	border: 1px solid rgba(240,255,0,1);
+	color:rgba(240,255,0,1);
+}
+
+
 /* ************************ FOOTER ***************************** */
 /* 
 		FOOTER

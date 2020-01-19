@@ -1,10 +1,10 @@
 <?php
-	// Chargement des classes
+		// Chargement des classes
 	require_once('model/Manager.php');
 	require_once('model/Session.php');
 	require_once('model/Ticket.php');
 
-	// LOGIN
+		// LOGIN
 	function home() {
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
 		$result = $session->nbOnline();
@@ -16,7 +16,7 @@
 	    }
 	}
 
-	// LOGIN
+		// LOGIN
 	function login($name, $pass) {
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
 		$result = $session->checkSession($name);
@@ -28,6 +28,7 @@
 		    $rPass = $result['password'];
 		    $rMail = $result['email'];
 		    $rCity = $result['city'];
+		    $rImg = $result['img'];
 		    $rExpertStop = $result['expert_stop'];
 		    // Comparaison du mot de passe
 			$isPasswordCorrect = password_verify($pass, $rPass);
@@ -42,6 +43,7 @@
 					$_SESSION['name'] = $rName;
 					$_SESSION['email'] = $rMail;
 					$_SESSION['city'] = $rCity;
+					$_SESSION['img'] = $rImg;
 					$_SESSION['expStop'] = $rExpertStop;
 
 					header('Location: index.php?action=open&app');
@@ -53,7 +55,7 @@
 		}
 	}
 
-	// SUBSCRIBE
+		// SUBSCRIBE
 	function subscribe($name, $mail, $city, $pass) {
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
 		$result = $session->subscribe($name, $mail, $city, $pass);
@@ -77,10 +79,10 @@
 	function logout() {
 		$_SESSION = array();
 		session_destroy();
-		header('Location: index.php');
+		header('Location: index.php?action=logout&redir');
 	}
 
-	// ADD TICKET
+		// ADD TICKET
 	function addTicket($text, $member) {
 		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
 		$result = $ticket->addTicket($text, $member);
@@ -92,7 +94,7 @@
 		}
 	}
 
-	// DELETE TICKET
+		// DELETE TICKET
 	function deleteTicket($id) {
 		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
 		$delete = $ticket->deleteTicket($id);
@@ -147,7 +149,37 @@
 		}
 	}
 
-	// OPEN INTERFACE
+		// UPLOAD IMG
+	function upload() {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$sizeMax = 2097152;
+   		$ext = array('jpg', 'jpeg', 'png');
+
+   		if ($_FILES['size'] <= $sizeMax) {
+   			$extUp = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
+   			if (in_array($extUp, $ext)) {
+   				$imgStorage = "./storage/img/".$_SESSION['id'].".".$extUp;
+   				$result = move_uploaded_file($_FILES['avatar']['tmp_name'], $imgStorage);
+   				if ($result) {
+   					$upload = $session->uploadImg($extUp, $_SESSION['id']);
+   					if ($upload === false) {
+   						throw new \Exception('Erreur SQL: Impossible d\'importer votre fichier !');
+   					} else {
+   						$_SESSION['img'] = $_SESSION['id'].".".$extUp;
+   						header('Location: index.php?action=upload&redir');
+   					}
+   				} else {
+   					throw new \Exception('Erreur : Impossible d\'importer votre fichier !');
+   				}
+   			} else {
+   				throw new \Exception('Erreur : L\'extension de votre fichier n\'est pas valide !');
+   			}
+   		} else {
+   			throw new \Exception('Erreur : Votre fichier est trop volumineux !');
+   		}
+	}
+
+		// OPEN INTERFACE
 	function openInterface($member) {
 		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
@@ -228,7 +260,7 @@
 		}
 	}
 
-	// VERIFY
+		// VERIFY
 	function confirm($id) {
 		$idTicket = $id;
 		require('view/confirm.php');
