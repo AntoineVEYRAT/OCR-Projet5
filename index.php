@@ -77,7 +77,10 @@
 
 				} else if ($_GET['action'] == 'update') {
 					if (isset($_GET['city'])) {
-						if (isset($_GET['verify'])) {
+						if (isset($_GET['redir'])) {
+							echo 'Votre ville a bien été modifié !';
+							header('refresh:5;url=index.php?action=open&app');
+						} else if (isset($_GET['verify'])) {
 							if (isset($_POST['update_city'])) {
 								$_POST['update_city'] = htmlspecialchars($_POST['update_city']);
 								updateCity($_POST['update_city']);
@@ -88,7 +91,22 @@
 							require ('view/update-city.php');
 						}
 					} else if (isset($_GET['pass'])) {
-
+						if (isset($_GET['redir'])) {
+							echo 'Votre mot de passe a bien été modifié !';
+							header('refresh:5;url=index.php?action=open&app');
+						}
+						else if (isset($_GET['verify'])) {
+							if (isset($_POST['old_pass']) && isset($_POST['update_pass']) && isset($_POST['update_passRep'])) {
+								$_POST['old_pass'] = htmlspecialchars($_POST['old_pass']);
+								$_POST['update_pass'] = htmlspecialchars($_POST['update_pass']);
+								$_POST['update_passRep'] = htmlspecialchars($_POST['update_passRep']);
+								updatePass($_POST['old_pass'], $_POST['update_pass'], $_POST['update_passRep']);
+							} else {
+								throw new Exception('Error : Le formulaire n\'est pas complet, ou les données ne sont pas identiques !');
+							}
+						} else {
+							require ('view/update-password.php');
+						}
 					} else {
 						header ('Location: index.php?action=open&app');
 					}	
@@ -98,7 +116,7 @@
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
 			}
 		} else {
-			require ('view/home.php');
+			home();
 		}
 	} catch(Exception $e) {
         $errorMessage = $e->getMessage();

@@ -4,7 +4,7 @@ namespace VeyratAntoine\HowIFish\Model;
 class Session extends Manager {
 
 	// Connexion
-    public function login($name, $pass) {
+    public function checkSession($name) {
 		$bdd = $this->dbConnect();
 		$req = $bdd->prepare('SELECT * FROM members WHERE name = :name');
 		$req->execute(array('name' => $name));
@@ -39,7 +39,7 @@ class Session extends Manager {
 		return $req;
 	}
 
-	// Inscription
+	// Changement de status
 	public function switchStatus($name, $nb) {
 		$bdd = $this->dbConnect();
 		$switch = $bdd->prepare('UPDATE members SET status= :status WHERE name = :name');
@@ -72,5 +72,26 @@ class Session extends Manager {
         $result = $update->fetch();
 
         return $result;
+	}
+
+	// nbOnline
+	public function nbOnline() {
+		$bdd = $this->dbConnect();
+		$verify = $bdd->query('SELECT COUNT(id) FROM members'); 
+        $result = $verify->fetchColumn();
+
+        return $result;
+	}
+
+	// Update PASSWORD
+	public function updatePass($pass) {
+		$bdd = $this->dbConnect();
+		$update = $bdd->prepare('UPDATE members SET password = :pass WHERE name = :name');
+        $result = $update->execute(array(
+        	'pass' => $pass,
+        	'name' => $_SESSION['name']
+        )); 
+
+        return $result;	
 	}
 }

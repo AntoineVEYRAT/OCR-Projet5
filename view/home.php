@@ -87,7 +87,7 @@
 					</div>
 				</div>
 				<div id="stats-bar">
-					<h4><img src="./public/img/fishing-ico.png" width="40px" /> 33 pêcheurs utilisent déjà l'application</h4>
+					<h4><img src="./public/img/fishing-ico.png" width="40px" /> <?php echo $result; ?> pêcheurs utilisent déjà l'application</h4>
 				</div>
 			<?php include('footer.php'); ?>
 		</div>

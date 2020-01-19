@@ -90,7 +90,7 @@
 				echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
 				echo '<p>Email : ' . $_SESSION['email'] . '</p>';
 				echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
-				echo '<p>Mot de passe (<a>Changer</a>)</p>';
+				echo '<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>';
 			?>
 			<br>
 			<a href="index.php?action=logout">Se déconnecter</a>

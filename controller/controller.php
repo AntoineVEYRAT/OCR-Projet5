@@ -5,9 +5,21 @@
 	require_once('model/Ticket.php');
 
 	// LOGIN
+	function home() {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$result = $session->nbOnline();
+
+		if ($result === false) {
+	    	throw new Exception('Erreur SQL: Impossible d\'accéder aux données !');
+	    } else {
+	    	require ('view/home.php');
+	    }
+	}
+
+	// LOGIN
 	function login($name, $pass) {
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
-		$result = $session->login($name, $pass);
+		$result = $session->checkSession($name);
 		if ($result === false) {
 	    	throw new Exception('Erreur : Impossible d\'accéder à vos données !');
 	    } else {
@@ -46,10 +58,10 @@
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
 		$result = $session->subscribe($name, $mail, $city, $pass);
 		if ($result != 0) {
-			throw new \Exception('Erreur : Cet identifiant est déjà pris, veuillez en choisir un nouveau !');
+			throw new \Exception('Erreur SQL: Cet identifiant est déjà pris, veuillez en choisir un nouveau !');
 		} else {
 			if ($pass == $name) {
-				throw new \Exception('Erreur : Vous ne devez pas utiliser un mot de passe similaire à votre identifiant !');
+				throw new \Exception('Erreur SQL: Vous ne devez pas utiliser un mot de passe similaire à votre identifiant !');
 			} else {
 				$insert = $session->subscribeInsert($name, $mail, $city, $pass);
 				if ($insert === false) {
@@ -89,6 +101,49 @@
 			throw new \Exception('Erreur SQL : Impossible de supprimer ce ticket !');
 		} else {
 			header('Location: index.php?action=open&app');
+		}
+	}
+
+		// UPDATE CITY
+	function updateCity($city) {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+
+		$session->updateCity($_SESSION['name'], $city);
+
+		if ($session === false) {
+			throw new \Exception('Erreur SQL : Impossible de changer votre nom de ville !');
+		} else {
+			$_SESSION['city'] = $city;
+			header('Location: index.php?action=update&city&redir');
+		}
+	}
+
+		// UPDATE PASSWORD
+	function updatePass($pass, $newPass, $newPassRep) {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+
+		$resultCheck = $session->checkSession($_SESSION['name']);
+		if ($resultCheck === false) {
+			throw new \Exception('Erreur SQL: Impossible d\'accéder à vos données !');
+		} else {
+			$oldPass = $resultCheck['password'];
+			$isOldPasswordCorrect = password_verify($pass, $oldPass);
+
+			if ($newPassRep != $newPass) {
+				throw new \Exception('Les deux mot de passe ne sont pas identiques  !');
+			} else {
+				if ($isOldPasswordCorrect) {
+					$passHache = password_hash($newPassRep, PASSWORD_DEFAULT);
+					$update = $session->updatePass($passHache);
+					if ($update === false) {
+						throw new \Exception('Erreur SQL: Impossible de modifier votre mot de passe !');
+					} else {
+						header('Location: index.php?action=update&pass&redir');
+					}
+				} else {
+					throw new \Exception('Erreur SQL: votre ancien mot de passe n\'est pas correct !');
+				}
+			}
 		}
 	}
 
@@ -170,20 +225,6 @@
 					require('view/front-app.php');
 				}
 			}
-		}
-	}
-
-	// UPDATE CITY
-	function updateCity($city) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
-
-		$session->updateCity($_SESSION['name'], $city);
-
-		if ($session === false) {
-			throw new \Exception('Erreur SQL : Impossible de changer votre nom de ville !');
-		} else {
-			$_SESSION['city'] = $city;
-			header('Location: index.php?action=open&app');
 		}
 	}
 
