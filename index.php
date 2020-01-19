@@ -78,7 +78,8 @@
 				} else if ($_GET['action'] == 'update') {
 					if (isset($_GET['city'])) {
 						if (isset($_GET['redir'])) {
-							echo 'Votre ville a bien été modifié !';
+							$message = 'Votre ville a bien été modifié !';
+							require ('view/aConfirm.php');
 							header('refresh:5;url=index.php?action=open&app');
 						} else if (isset($_GET['verify'])) {
 							if (isset($_POST['update_city'])) {
