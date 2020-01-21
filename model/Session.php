@@ -14,10 +14,19 @@ class Session extends Manager {
 	}
 
 	// Inscription
-	public function subscribe($name, $mail, $pass) {
+	public function subscribeVerifyName($name) {
 		$bdd = $this->dbConnect();
 		$verify = $bdd->prepare('SELECT COUNT(id) FROM members WHERE name = :name');
         $verify->execute(array('name' => $name)); 
+        $result = $verify->fetchColumn();
+
+        return $result;
+	}
+
+	public function subscribeVerifyMail($mail) {
+		$bdd = $this->dbConnect();
+		$verify = $bdd->prepare('SELECT COUNT(id) FROM members WHERE mail = :mail');
+        $verify->execute(array('mail' => $mail)); 
         $result = $verify->fetchColumn();
 
         return $result;
@@ -30,7 +39,7 @@ class Session extends Manager {
 		// Insertion
 		$req = $bdd->prepare('INSERT INTO members(name, email, city, password) VALUES(:name, :mail, :city, :pass)');
 		$req->execute(array(
-			'name' => $_POST['subscribe_name'],
+			'name' => $name,
 			'mail' => $mail,
 			'city' => $city,
 			'pass' => $pass_hache
@@ -102,6 +111,21 @@ class Session extends Manager {
         $result = $upload->execute(array(
         	'img' => $_SESSION['id'].".".$ext,
         	'id' => $_SESSION['id']
+        )); 
+
+        return $result;	
+	}
+
+	// Try EXPERT
+	public function addExp($id, $time) {
+		$bdd = $this->dbConnect();
+		$dateNow = date('Y-m-d');
+		$dateExp = date('Y-m-d', strtotime("+$time day"));
+		$upload = $bdd->prepare('UPDATE members SET expert_stop = :expDate, subscribe = :subDate WHERE id = :id');
+        $result = $upload->execute(array(
+        	'expDate' => $dateExp,
+        	'subDate' => $dateNow,
+        	'id' => $id
         )); 
 
         return $result;	

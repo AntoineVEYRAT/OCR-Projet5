@@ -91,13 +91,8 @@
 			<br>
 			<div id="avatar">
 				<?php 
-					if(isset($_SESSION['img'])):
 						echo '<img src="/storage/img/' . $_SESSION['img'] . '" alt="' . $_SESSION['img'] . '" />';
 						echo '<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>';
-					else:
-						echo '<img src="./storage/img/default.png" alt="default_avatar" />';
-						echo '<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>';
-					endif;
 				?>
 			</div>
 			<br>

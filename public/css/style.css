@@ -148,11 +148,11 @@ header {
 }
 
 .welcom-box a:hover {
-	-webkit-animation-duration: .7s;
-	animation-duration: .7s;
+	-webkit-animation-duration: .6s;
+	animation-duration: .6s;
 	-webkit-animation-name: scaleX;
 	animation-name: scaleX;
-	transform :scale(1.2);
+	transform :scale(1.1);
 }
 
 @media screen and (max-width: 520px) {
@@ -166,26 +166,20 @@ header {
 	0% {
 	    transform :scale(1);
   	}
-  	25% {
-	    transform :scale(1.1);
-  	}
-  	50% {
-	    transform :scale(1);
-  	}
   	100% {
-	    transform :scale(1.2);
+	    transform :scale(1.1);
   	}
 }
 
 @-webkit-keyframes fadein {
 	0% {
-	    -webkit-transform: translateY(-20px);
-	    transform: translateY(-20px);
+	    -webkit-transform: translateY(-30px);
+	    transform: translateY(-30px);
 	    opacity:0;
   	}
   	50% {
-  		-webkit-transform: translateY(-20px);
-    	transform: translateY(-20px);
+  		-webkit-transform: translateY(-30px);
+    	transform: translateY(-30px);
     	opacity:0;
   	}
   	70% {
@@ -351,12 +345,38 @@ section {
 	transform:translateX(-50%);
 }
 
-.offers-block p {
-	margin-top: 50px;
-	text-align: center;
-	font-size : 1.5em;
+.offers-block li {
+	list-style-type: circle;
+	text-align:left;
+	font-size : 1em;
 	font-family: Arial;
 	color: white;
+	margin-top: 20px;
+}
+
+.offers-block p {
+	position: absolute;
+	bottom:5px;
+	left:50%;
+	transform: translateX(-50%);
+}
+
+.offers-block a {
+	text-decoration: none;
+	color:white;
+	padding:5px;
+	border: 1px solid rgba(240,255,0,1);
+}
+
+.offers-block a:hover {
+	color:rgba(240,255,0,1);
+	background-color: rgba(74,74,128,1);
+	text-decoration: none;
+}
+
+.offers-block ul {
+	list-style-type: none;
+	margin-top: 70px;
 }
 
 .offers-block h4 {

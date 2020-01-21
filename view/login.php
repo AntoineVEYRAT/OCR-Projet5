@@ -2,7 +2,7 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>UPload</h3>
+			<h3>CONNEXION</h3>
 			<br>
 			<form action="index.php?action=login&amp;verify" method="post" class="login-form">
 				<div class="session">

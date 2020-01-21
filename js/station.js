@@ -77,31 +77,31 @@ class Station{
                         if (Number(windSpeed) < 12) {
                             windSpeedN = 19;
                         } else {
-                            windSpeedN = 16;
+                            windSpeedN = 15;
                         }
                     } else if (Number(windSpeed) < 37) {
-                        windSpeedN = 15;
+                        windSpeedN = 10;
                     } else {
-                        windSpeedN = 14;
+                        windSpeedN = 8;
                     }
                 } else if (Number(windSpeed) < 100) {
                     if (Number(windSpeed) < 75){
                         if (Number(windSpeed) < 62) {
-                            windSpeedN = 13;
+                            windSpeedN = 5;
                         } else {
-                            windSpeedN = 12;
+                            windSpeedN = 4;
                         }
                     } else if (Number(windSpeed) < 87) {
-                        windSpeedN = 11;
+                        windSpeedN = 3;
                     } else {
-                        windSpeedN = 9;
+                        windSpeedN = 2;
                     }
                 } else if (Number(windSpeed) >= 100) {
                     if (Number(windSpeed) < 130){
                         if (Number(windSpeed) < 115) {
-                            windSpeedN = 6;
+                            windSpeedN = 1;
                         } else {
-                            windSpeedN = 4;
+                            windSpeedN = 0;
                         }
                     } else if (Number(windSpeed) < 150) {
                         windSpeedN = 1;

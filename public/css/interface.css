@@ -4,6 +4,7 @@
 body, .container{
 	width:100%;
 	height:100%;
+	max-width: 2000px;
 	margin:0;
 	padding:0;
 	display:flex;
@@ -44,6 +45,15 @@ header {
 	display:flex;
 	flex-direction: row;
 	background-color: rgba(50,50,50,1);
+}
+
+#menu-bar-grey h1:hover {
+	color:rgba(240,255,0,1);
+}
+
+.logo-grey a {
+	text-decoration: none;
+	color:white;
 }
 
 .logo-grey, .menu-grey {
@@ -87,7 +97,7 @@ header {
 }
 
 /* 
-		LOGIN & SUBSCRIBE
+		ALL VIEW
 							*/
 .session {
 	display: flex;
@@ -180,7 +190,10 @@ header {
 	width:100%;
 	height:auto;
 	justify-content: center;
-	background-color: rgba(74,74,128,0.9);
+	background-image: url('../img/app-background.png');
+	background-repeat: no-repeat;
+	background-color:rgba(100,100,172,1);
+	background-size: 100%;
 }
 
 .ticket {
@@ -355,7 +368,6 @@ header {
 	display:inline-flex;
 	justify-content: center;
 	align-items: center;
-	border:1px solid rgba(240,255,0,1);
 }
 
 .stat i:hover {

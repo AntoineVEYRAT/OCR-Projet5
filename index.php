@@ -11,8 +11,10 @@
 						} else {
 							require ('view/login.php');
 						}
-					} else {
-						// AUTRE QUE APP
+					} else if (isset($_GET['expert'])){
+						require ('view/expert.php');
+					} else if (isset($_GET['try'])) {
+						require ('view/expert-try.php');
 					}
 					
 				}
@@ -30,19 +32,17 @@
 				} else if ($_GET['action'] == 'subscribe') {
 					if (isset($_GET['verify'])) {
 						if (!empty($_POST)) {
-							if (isset($_POST['subscribe_name']) 
-							&& isset($_POST['subscribe_mail']) 
-							&& isset($_POST['subscribe_city'])
-							&& isset($_POST['subscribe_pass'])
+							if (!empty($_POST['subscribe_name']) 
+							AND !empty($_POST['subscribe_mail']) 
+							AND !empty($_POST['subscribe_city'])
+							AND !empty($_POST['subscribe_pass'])
 							) {
 								if (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#i", $_POST['subscribe_mail'])) {
-									$_POST['subscribe_name'] = strtolower($_POST['subscribe_name']);
-									subscribe(
-										htmlspecialchars($_POST['subscribe_name']), 
-										htmlspecialchars($_POST['subscribe_mail']), 
-										htmlspecialchars($_POST['subscribe_city']),
-										htmlspecialchars($_POST['subscribe_pass'])
-									);
+									$_POST['subscribe_name'] = strtolower(htmlspecialchars($_POST['subscribe_name']));
+									$_POST['subscribe_mail'] = htmlspecialchars($_POST['subscribe_mail']);
+									$_POST['subscribe_city'] = htmlspecialchars($_POST['subscribe_city']);
+									$_POST['subscribe_pass'] = htmlspecialchars($_POST['subscribe_pass']);
+									subscribe($_POST['subscribe_name'], $_POST['subscribe_mail'], $_POST['subscribe_city'], $_POST['subscribe_pass']);
 								} else {
 									throw new Exception('Error : Email invalide !');
 								}
@@ -52,6 +52,10 @@
 						} else {
 							throw new Exception('Error : Aucunes données dans le formulaire !');
 						}
+					} else if (isset($_GET['redir'])){
+						$message = 'Votre inscription a bien été prise en compte !';
+						require ('view/action-confirm.php');
+						header('refresh:3;url=index.php?action=open&app');
 					} else {
 						require ('view/subscribe.php');
 					}
@@ -132,8 +136,17 @@
 					} else {
 						require ('view/upload.php');
 					}
+				} else if ($_GET['action'] == 'expert') {
+					if (isset($_GET['purchase'])) {
+						if (isset($_SESSION['id'])) {
+							tryExp($_SESSION['id']);
+						} else {
+							throw new Exception('Error : Vous devez être connecté !');
+						}
+					} else {
+						require ('view/index.php');
+					}
 				}
-
 			} else {
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
 			}

@@ -58,18 +58,23 @@
 		// SUBSCRIBE
 	function subscribe($name, $mail, $city, $pass) {
 		$session = new \VeyratAntoine\HowIFish\Model\Session();
-		$result = $session->subscribe($name, $mail, $city, $pass);
-		if ($result != 0) {
+		$resultName = $session->subscribeVerifyName($name);
+		if ($resultName != 0) {
 			throw new \Exception('Erreur SQL: Cet identifiant est déjà pris, veuillez en choisir un nouveau !');
 		} else {
-			if ($pass == $name) {
-				throw new \Exception('Erreur SQL: Vous ne devez pas utiliser un mot de passe similaire à votre identifiant !');
+			$resultMail = $session->subscribeVerifyMail($mail);
+			if ($resultMail != 0) {
+				throw new \Exception('Erreur SQL: L\'adresse mail est déjà répertoriée dans notre base de donnée !');
 			} else {
-				$insert = $session->subscribeInsert($name, $mail, $city, $pass);
-				if ($insert === false) {
-					throw new \Exception('Erreur SQL: Impossible d\'enregistrer vos données !');
+				if ($pass == $name) {
+					throw new \Exception('Erreur SQL: Vous ne devez pas utiliser un mot de passe similaire à votre identifiant !');
 				} else {
-					header('Location: index.php');
+					$insert = $session->subscribeInsert($name, $mail, $city, $pass);
+					if ($insert === false) {
+						throw new \Exception('Erreur SQL: Impossible d\'enregistrer vos données !');
+					} else {
+						header('Location: index.php?action=subscribe&redir');
+					}
 				}
 			}
 		}
@@ -85,13 +90,30 @@
 		// ADD TICKET
 	function addTicket($text, $member) {
 		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
-		$result = $ticket->addTicket($text, $member);
-
-		if ($result == false) {
-			throw new \Exception('Erreur SQL : Ajout de la note impossible !');
+		
+		if ($_SESSION['status'] == 1) {
+			$result = $ticket->addTicket($text, $member);
+			if ($result == false) {
+				throw new \Exception('Erreur SQL : Ajout de la note impossible !');
+			} else {
+				header('Location: index.php?action=open&app');
+			}
 		} else {
-			header('Location: index.php?action=open&app');
+			$nbTicket = $ticket->nbTicket($member);
+			if ($nbTicket == 0) {
+				$result = $ticket->addTicket($text, $member);
+				if ($result == false) {
+					throw new \Exception('Erreur SQL : Ajout de la note impossible !');
+				} else {
+					header('Location: index.php?action=open&app');
+				}
+			} else {
+				$message = 'Désolé, vous avez atteint le nombre maximal de note !';
+				require ('view/action-confirm.php');
+				header('refresh:3;url=index.php?action=open&app');
+			}
 		}
+		
 	}
 
 		// DELETE TICKET
@@ -155,21 +177,37 @@
 		$sizeMax = 2097152;
    		$ext = array('jpg', 'jpeg', 'png');
 
-   		if ($_FILES['size'] <= $sizeMax) {
+   		if ($_FILES['avatar']['size'] <= $sizeMax) {
    			$extUp = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
    			if (in_array($extUp, $ext)) {
    				$imgStorage = "./storage/img/".$_SESSION['id'].".".$extUp;
-   				$result = move_uploaded_file($_FILES['avatar']['tmp_name'], $imgStorage);
-   				if ($result) {
-   					$upload = $session->uploadImg($extUp, $_SESSION['id']);
-   					if ($upload === false) {
-   						throw new \Exception('Erreur SQL: Impossible d\'importer votre fichier !');
-   					} else {
-   						$_SESSION['img'] = $_SESSION['id'].".".$extUp;
-   						header('Location: index.php?action=upload&redir');
-   					}
+   				if (file_exists('./storage/img/'. $_SESSION['img'])) {
+   					unlink($_SESSION['img']);
+   					$result = move_uploaded_file($_FILES['avatar']['tmp_name'], $imgStorage);
+	   				if ($result) {
+	   					$upload = $session->uploadImg($extUp, $_SESSION['id']);
+	   					if ($upload === false) {
+	   						throw new \Exception('Erreur SQL: Impossible d\'importer votre fichier !');
+	   					} else {
+	   						$_SESSION['img'] = $_SESSION['id'].".".$extUp;
+	   						header('Location: index.php?action=upload&redir');
+	   					}
+	   				} else {
+	   					throw new \Exception('Erreur : Impossible d\'importer votre fichier !');
+	   				}
    				} else {
-   					throw new \Exception('Erreur : Impossible d\'importer votre fichier !');
+   					$result = move_uploaded_file($_FILES['avatar']['tmp_name'], $imgStorage);
+	   				if ($result) {
+	   					$upload = $session->uploadImg($extUp, $_SESSION['id']);
+	   					if ($upload === false) {
+	   						throw new \Exception('Erreur SQL: Impossible d\'importer votre fichier !');
+	   					} else {
+	   						$_SESSION['img'] = $_SESSION['id'].".".$extUp;
+	   						header('Location: index.php?action=upload&redir');
+	   					}
+	   				} else {
+	   					throw new \Exception('Erreur : Impossible d\'importer votre fichier !');
+	   				}
    				}
    			} else {
    				throw new \Exception('Erreur : L\'extension de votre fichier n\'est pas valide !');
@@ -257,6 +295,21 @@
 					require('view/front-app.php');
 				}
 			}
+		}
+	}
+
+		// TRY EXPERT
+	function tryExp($id) {
+		$session = new \VeyratAntoine\HowIFish\Model\Session();
+
+		$updateDates = $session->addExp($id, 14);
+		$switchStatus = $session->switchStatus($_SESSION['name'], 1);
+
+		if (($updateDates === false) && ($switchStatus === false)) {
+			throw new \Exception('Erreur SQL: Impossible de modifier vos données !');
+		} else {
+			$_SESSION['status'] = 1;
+			$_SESSION['expStop'] = date('Y-m-d', strtotime("+14 day"));
 		}
 	}
 

@@ -74,7 +74,7 @@
 					</div>
 					<div class="promo-bar-img">
 						<img src="./public/img/purple-button.png" />
-						<a href="test.php">J'en profite !</a>
+						<a href="index.php?action=open&try">J'en profite !</a>
 					</div>
 				</div>
 				<div id="offers-bar">
@@ -82,8 +82,29 @@
 						<h3>How I Fish vous propose <img src="./public/img/2.png" width="75px"/> options</h3>
 					</div>
 					<div class="offers-bar-block">
-						<div class="offers-block"><img src="./public/img/offers-cadre-white.png" /><h4>Occasionnel</h4></h3><p>Test</p></div>
-						<div class="offers-block"><img src="./public/img/offers-cadre-yellow.png" /><h4>Expert</h4><p>Test</p></div>
+						<div class="offers-block">
+							<img src="./public/img/offers-cadre-white.png" />
+							<h4>Occasionnel</h4>
+							<ul>
+								<li>Accès à l'interface</li>
+								<li>Changement de villes illimité</li>
+								<li>Indice de pêchabilité (note sur 10)</li>
+								<li>Nombre de notes limité</li>
+							</ul>
+							<p><a href="index.php?action=open&app">Découvrir</a></p>
+						</div>
+						<div class="offers-block">
+							<img src="./public/img/offers-cadre-yellow.png" />
+							<h4>Expert</h4>
+							<ul>
+								<li>Accès à l'interface</li>
+								<li>Changement de villes illimité</li>
+								<li>Indice de pêchabilité (note sur 10)</li>
+								<li>Accès aux indices d'experts</li>
+								<li>Nombre de notes illimité</li>
+							</ul>
+							<p><a href="index.php?action=open&expert">Découvrir</a></p>
+						</div>
 					</div>
 				</div>
 				<div id="stats-bar">
