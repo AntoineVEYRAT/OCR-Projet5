@@ -6,11 +6,13 @@
 			<br>
 			<label>Avatar actuel</label>
 				<?php 
-					if (isset($_SESSION['img'])) {
+					if(isset($_SESSION['img'])):
 						echo '<img src="./storage/img/' . $_SESSION['img'] . '" alt="' . $_SESSION['img'] . '" width="100px" height="120px"/>';
-					} else {
-						echo '<img src="./storage/img/default.png" alt="default_avatar" />';
-					}
+					else:
+				?>
+						<img src="./storage/img/default.png" alt="default_avatar" />
+				<?php
+					endif;
 				?>			
 			<br>
 			<form action="index.php?action=upload&verify" method="post" class="upload_form" enctype="multipart/form-data">

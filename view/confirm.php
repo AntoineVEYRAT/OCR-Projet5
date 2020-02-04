@@ -10,9 +10,7 @@
 			?>
 		</div>
 		<div class="confirm-zone">
-			<?php
-				echo '<a href="index.php?action=open&app" class="back">Retour</a>';			
-			?>
+			<a href="index.php?action=open&app" class="back">Retour</a>		
 		</div>
 	</div>
 </div>

@@ -4,20 +4,20 @@
 		<meta charset="UTF-8">
 		<title>How I Fish</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="stylesheet" href="../public/css/style.css">
 		<!-- Load Fontawesome -->
 		<script src="https://kit.fontawesome.com/fa7ae6c9e7.js" crossorigin="anonymous"></script>
-		<!-- Load Bootsrap -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<!-- Load STYLE -->
+		<link rel="stylesheet" href="../public/css/style.css">
 		<!-- Load JQUERY -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	</head>
 	<body>
-		<div class="arrow"><a href="#" class="js-scrollTop"><i class="fas fa-chevron-up fa-2x"></i></a></div>
-		<div class="container-fluid">
+		<div class="arrow">
+			<a href="#" class="js-scrollTop">
+				<i class="fas fa-chevron-up fa-2x"></i>
+			</a>
+		</div>
+		<div class="container">
 			<header>
 				<div id="menu-bar">
 					<div class="logo">
@@ -70,36 +70,38 @@
 			</section>
 				<div id="promo-bar">
 					<div class="promo-bar-text">
-						<p>Profitez des fonctionnalitées du pêcheur Expert gratuitement pendant <span class="yellow">15 jours</span> !</p>
+						<p>Profitez des fonctionnalités du pêcheur Expert gratuitement pendant <span class="yellow">15 jours</span> !</p>
 					</div>
 					<div class="promo-bar-img">
-						<img src="./public/img/purple-button.png" />
+						<img src="./public/img/purple-button.png" alt="button-try-it"/>
 						<a href="index.php?action=open&try">J'en profite !</a>
 					</div>
 				</div>
 				<div id="offers-bar">
 					<div class="offers-bar-text">
-						<h3>How I Fish vous propose <img src="./public/img/2.png" width="75px"/> options</h3>
+						<h3>How I Fish vous propose </h3>
+						<img src="./public/img/2.png" alt="2" />
+						<h3> options</h3>
 					</div>
 					<div class="offers-bar-block">
 						<div class="offers-block">
-							<img src="./public/img/offers-cadre-white.png" />
+							<img src="./public/img/offers-cadre-white.png" alt="white-offer" />
 							<h4>Occasionnel</h4>
 							<ul>
 								<li>Accès à l'interface</li>
-								<li>Changement de villes illimité</li>
-								<li>Indice de pêchabilité (note sur 10)</li>
+								<li>Changement de villes en illimité</li>
+								<li>Indice de pêchabilité</li>
 								<li>Nombre de notes limité</li>
 							</ul>
 							<p><a href="index.php?action=open&app">Découvrir</a></p>
 						</div>
 						<div class="offers-block">
-							<img src="./public/img/offers-cadre-yellow.png" />
+							<img src="./public/img/offers-cadre-yellow.png" alt="yellow-offer" />
 							<h4>Expert</h4>
 							<ul>
 								<li>Accès à l'interface</li>
-								<li>Changement de villes illimité</li>
-								<li>Indice de pêchabilité (note sur 10)</li>
+								<li>Changement de villes en illimité</li>
+								<li>Indice de pêchabilité</li>
 								<li>Accès aux indices d'experts</li>
 								<li>Nombre de notes illimité</li>
 							</ul>
@@ -108,11 +110,19 @@
 					</div>
 				</div>
 				<div id="stats-bar">
-					<h4><img src="./public/img/fishing-ico.png" width="40px" /> <?php echo $result; ?> pêcheurs utilisent déjà l'application</h4>
+					<div class="stats-bar">
+						<img src="./public/img/fishing-ico.png" alt="icon-fisher" />
+						<h4>  
+							<?php 
+								echo $result; 
+							?> 
+							pêcheurs utilisent déjà l'application
+						</h4>
+					</div>
 				</div>
 			<?php include('footer.php'); ?>
 		</div>
+		<script src="./public/js/animate.js"></script>
 	</body>
-	<script type="text/javascript" src="./js/animate.js"></script>
 </html>
 

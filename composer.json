@@ -1,0 +1,9 @@
+{
+    "name": "veyratantoine/howifish",
+    "description": "A new fisher application",
+    "require": {},
+    "autoload" : {
+    	"psr-4" : {
+		"model\\" : "model"}
+	}
+}

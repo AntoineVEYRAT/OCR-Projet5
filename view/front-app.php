@@ -1,5 +1,4 @@
 <?php ob_start(); ?>
-
 <div class="appli-content">
 	<div id="tickets">
 		<div class="ticket noteform">
@@ -17,10 +16,36 @@
 			<?php 
 				if($noTicket == false):
 					while($ticket = $load->fetch()):
-						echo '<div class="ticket-write" ><p>' . $ticket['date'] . '</p><p>' . $ticket['text'] . '</p><a href="index.php?action=ticket&delete&id=' . $ticket['id'] . '"><div class="cross"><i class="fas fa-trash-alt"></i></div></a><div class="arrow-down"></div></div>';
+			?>
+						<div class="ticket-write" >
+							<p>
+								<?php 
+									echo $ticket['date'];
+								?>
+							</p>
+							<p>
+								<?php 
+									echo $ticket['text'];
+								?>
+							</p>
+							<?php
+								echo '<a href="index.php?action=ticket&delete&id=' . $ticket['id'] . '">';
+							?>
+									<div class="cross">
+										<i class="fas fa-trash-alt"></i>
+									</div>
+								</a>
+							<div class="arrow-down"></div>
+						</div>
+				<?php
 					endwhile;
 				else:
-					echo '<div class="ticket-write" ><p>Vous n\'avez aucune note.</p><div class="arrow-down"></div></div>';
+				?>
+					<div class="ticket-write" >
+						<p>Vous n\'avez aucune note.</p>
+						<div class="arrow-down"></div>
+					</div>';
+			<?php
 				endif;
 			?>
 			<div class="pagin">
@@ -41,29 +66,36 @@
 			<br>
 			<?php 
 				if($_SESSION['status'] == 1):
-					?>
+			?>
 					<img src="./public/img/check.png" alt="check" />
 					<br>
-					<?php
-						echo '<p>Vous êtes un pêcheur <span class="yellow">Expert</span> !</p><br>';
-						echo '<p>Date de fin :</p><p>' . $_SESSION['expStop'] . '</p>';
+					<p>Vous êtes un pêcheur <span class="yellow">Expert</span> !</p><br>';
+					<p>Date de fin :</p>
+					<p>
+				<?php
+						$date = DateTime::createFromFormat('Y-m-d', $_SESSION['expStop']);
+						echo $date->format('d-m-Y');
+				?>
+					</p>
+			<?php
 				elseif($_SESSION['status'] == 2):
-					?>
+			?>
 					<img src="./public/img/uncheck.png" alt="check" />
 					<br>
-					<?php
-						echo '<p>Désolé, vous n\'êtes plus pêcheur Expert !</p>';
+					<p>Vous n'êtes plus pêcheur Expert !</p>
+			<?php
 				else:
-					?>
+			?>
 					<img src="./public/img/uncheck.png" alt="check" />
 					<br>
-					<?php
-						echo '<p>Vous êtes un pêcheur occasionnel.</p><p><a href="index.php#offers-bar">Découvrez le mode Expert !</a></p>';
+					<p>Vous êtes un pêcheur occasionnel.</p>
+					<p><a href="index.php#offers-bar">Découvrez le mode Expert !</a></p>
+			<?php
 				endif;
-					?>
+			?>
 		</div>
 		<div class="note-module modules">
-			<p>Aujourd'hui, la note est de :</p>
+			<p>Aujourd'hui, l'indice de pêche est de :</p>
 			<h5><span id="resultWeather"></span>/10</h5>
 			<p><span id="resultCityName"></span></p>
 			<p>(<span id="resultCountryName"></span>)</p>
@@ -101,6 +133,7 @@
 					echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
 					echo '<p>Email : ' . $_SESSION['email'] . '</p>';
 					echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
+					echo'<span id="city_error"></span>';
 					echo '<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>';
 				?>
 			</div>
@@ -109,7 +142,13 @@
 		</div>
 	</div>
 </div>
-
+<script src="./public/js/AjaxGet.js"></script>
+<script src="./public/js/Station.js"></script>
+<script type="text/javascript">
+	const city = document.getElementById('city').innerHTML;
+	let currentWeather = new Station(city);
+	currentWeather.requetExist();
+</script>
 <?php 
 	$content = ob_get_clean();
 	require('template.php'); 

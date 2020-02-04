@@ -1,12 +1,13 @@
 <?php
 		// Chargement des classes
-	require_once('model/Manager.php');
-	require_once('model/Session.php');
-	require_once('model/Ticket.php');
+	require __DIR__ . '/../vendor/autoload.php';
+	use model\Manager;
+	use model\Session;
+	use model\Ticket;
 
 		// LOGIN
 	function home() {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 		$result = $session->nbOnline();
 
 		if ($result === false) {
@@ -18,7 +19,7 @@
 
 		// LOGIN
 	function login($name, $pass) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 		$result = $session->checkSession($name);
 		if ($result === false) {
 	    	throw new Exception('Erreur : Impossible d\'accéder à vos données !');
@@ -57,7 +58,7 @@
 
 		// SUBSCRIBE
 	function subscribe($name, $mail, $city, $pass) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 		$resultName = $session->subscribeVerifyName($name);
 		if ($resultName != 0) {
 			throw new \Exception('Erreur SQL: Cet identifiant est déjà pris, veuillez en choisir un nouveau !');
@@ -80,7 +81,7 @@
 		}
 	}
 
-	// LOGOUT
+		// LOGOUT
 	function logout() {
 		$_SESSION = array();
 		session_destroy();
@@ -89,7 +90,7 @@
 
 		// ADD TICKET
 	function addTicket($text, $member) {
-		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
+		$ticket = new Ticket();
 		
 		if ($_SESSION['status'] == 1) {
 			$result = $ticket->addTicket($text, $member);
@@ -118,7 +119,7 @@
 
 		// DELETE TICKET
 	function deleteTicket($id) {
-		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
+		$ticket = new Ticket();
 		$delete = $ticket->deleteTicket($id);
 
 		if ($delete == false) {
@@ -130,7 +131,7 @@
 
 		// UPDATE CITY
 	function updateCity($city) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 
 		$session->updateCity($_SESSION['name'], $city);
 
@@ -144,7 +145,7 @@
 
 		// UPDATE PASSWORD
 	function updatePass($pass, $newPass, $newPassRep) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 
 		$resultCheck = $session->checkSession($_SESSION['name']);
 		if ($resultCheck === false) {
@@ -173,7 +174,7 @@
 
 		// UPLOAD IMG
 	function upload() {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 		$sizeMax = 2097152;
    		$ext = array('jpg', 'jpeg', 'png');
 
@@ -219,8 +220,8 @@
 
 		// OPEN INTERFACE
 	function openInterface($member) {
-		$ticket = new \VeyratAntoine\HowIFish\Model\Ticket();
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$ticket = new Ticket();
+		$session = new Session();
 
 		if (isset($_SESSION['id'])) {
 			$result = $session->verifStatus($_SESSION['name']);
@@ -300,7 +301,7 @@
 
 		// TRY EXPERT
 	function tryExp($id) {
-		$session = new \VeyratAntoine\HowIFish\Model\Session();
+		$session = new Session();
 
 		$updateDates = $session->addExp($id, 14);
 		$switchStatus = $session->switchStatus($_SESSION['name'], 1);
@@ -319,3 +320,41 @@
 		require('view/confirm.php');
 	}
 
+		// REQUIRES
+	function open($view) {
+		if ($view == 'subscribe') {
+			require('view/subscribe.php');
+		} else if ($view == 'login') {
+			require('view/login.php');
+		} else if ($view == 'updateCity') {
+			require('view/update-city.php');
+		} else if ($view == 'updatePass') {
+			require('view/update-password.php');
+		} else if ($view == 'upload') {
+			require('view/upload.php');
+		} else if ($view == 'expert') {
+			require('view/expert.php');
+		} else if ($view == 'tryIt') {
+			require('view/expert-try.php');
+		} else {
+			throw new \Exception('Erreur : La page recherchée n\'existe pas !');
+		}
+	}
+
+		// REDIRECTION
+	function redir($url) {
+		header ('Location: ' . $url .'');
+	}
+
+		// REDIRECTION WITH TIME
+	function redirWTime($text, $time, $url) {
+		$message = $text;
+		require('view/action-confirm.php');
+		header('refresh:'. $time .';url='. $url .'');
+	}
+
+		// REDIRECTION ERROR VIEW
+	function openErrorView($error) {
+		$errorMessage = $error;
+		require('view/error.php');
+	}

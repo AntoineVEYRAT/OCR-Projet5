@@ -1,5 +1,5 @@
 <?php
-namespace VeyratAntoine\HowIFish\Model;
+namespace model;
 
 class Ticket extends Manager {
 

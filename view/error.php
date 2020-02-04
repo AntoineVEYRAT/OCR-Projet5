@@ -5,21 +5,23 @@
 		<br>
 		<h4>
 		<?php
-			if (($errorMessage === 'Erreur : Mauvais identifiant et/ou mot de passe !') || ($errorMessage ==='Erreur : Mot de passe erroné !')) {
+			if(($errorMessage === 'Erreur : Mauvais identifiant et/ou mot de passe !') || ($errorMessage ==='Erreur : Mot de passe erroné !')):
 				echo $errorMessage;
 				echo '</h4><br><a href="index.php?action=login">Réessayer</a>';
-			} else if (($errorMessage === 'Error : Email invalide !') || 
+			elseif(
+				($errorMessage === 'Error : Email invalide !') || 
 				($errorMessage === 'Error : Certaine(s) donnée(s) sont absentes !') || 
-				($errorMessage === 'Error : Aucunes données dans le formulaire !')) {
-					echo $errorMessage;
-					echo '</h4><br><a href="index.php?action=subscribe">Retour</a>';
-			} else if ($errorMessage === 'Error : Le nom de ville n\'est pas correct !') {
+				($errorMessage === 'Error : Aucunes données dans le formulaire !')
+			):
+				echo $errorMessage;
+				echo '</h4><br><a href="index.php?action=subscribe">Retour</a>';
+			elseif($errorMessage === 'Error : Le nom de ville n\'est pas correct !'):
 				echo $errorMessage;
 				echo '</h4><br><a href="index.php?action=update&city">Réessayer</a>';
-			} else {
+			else:
 				echo $errorMessage;
 				echo '</h4><br><a href="index.php"> Retourner à l\'accueil</a>';
-			}
+			endif;
 		?>
 	</div>
 </div>

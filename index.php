@@ -1,5 +1,7 @@
 <?php
+	require __DIR__ . '/vendor/autoload.php';
 	require('controller/controller.php');
+
 	session_start();
 	try {
 		if (!empty($_GET)) {
@@ -9,16 +11,16 @@
 						if (isset($_SESSION['id'])) {
 							openInterface($_SESSION['id']);
 						} else {
-							require ('view/login.php');
+							open('login');
 						}
 					} else if (isset($_GET['expert'])){
-						require ('view/expert.php');
+						open('expert');
 					} else if (isset($_GET['try'])) {
-						require ('view/expert-try.php');
-					}
-					
-				}
-				else if ($_GET['action'] == 'login') {
+						open('tryIt');
+					} else {
+						throw new Exception('Error : La page recherchée n\'existe pas !');
+					}	
+				} else if ($_GET['action'] == 'login') {
 					if (isset($_GET['verify'])) {
 						if (!empty($_POST)) {
 							$_POST['login_name'] = strtolower($_POST['login_name']);
@@ -27,7 +29,7 @@
 							throw new Exception('Error : Aucunes données dans le formulaire !');
 						}
 					} else {
-						require ('view/login.php');
+						open('login');
 					}
 				} else if ($_GET['action'] == 'subscribe') {
 					if (isset($_GET['verify'])) {
@@ -53,11 +55,9 @@
 							throw new Exception('Error : Aucunes données dans le formulaire !');
 						}
 					} else if (isset($_GET['redir'])){
-						$message = 'Votre inscription a bien été prise en compte !';
-						require ('view/action-confirm.php');
-						header('refresh:3;url=index.php?action=open&app');
+						redirWTime('Votre inscription a bien été prise en compte !', 4, 'index.php?action=open&app');
 					} else {
-						require ('view/subscribe.php');
+						open('subscribe');
 					}
 				} else if ($_GET['action'] == 'ticket') {
 					if (isset($_GET['add'])) {
@@ -73,14 +73,12 @@
 							throw new Exception('Error : Désolé, ce ticket n\'existe pas !');
 						}
 					} else {
-						header ('Location: index.php?action=open&app');
+						redir('Location: index.php?action=open&app');
 					}
 						
 				} else if ($_GET['action'] == 'logout') {
 					if (isset($_GET['redir'])) {
-							$message = 'Vous avez bien été déconnecté !';
-							require ('view/action-confirm.php');
-							header('refresh:3;url=index.php');
+						redirWTime('Vous avez bien été déconnecté !', 3, 'index.php');
 					} else {
 						logout();
 					}
@@ -88,9 +86,7 @@
 				} else if ($_GET['action'] == 'update') {
 					if (isset($_GET['city'])) {
 						if (isset($_GET['redir'])) {
-							$message = 'Votre ville a bien été modifié !';
-							require ('view/action-confirm.php');
-							header('refresh:5;url=index.php?action=open&app');
+							redirWTime('Votre ville a bien été modifié !', 3, 'index.php?action=open&app');
 						} else if (isset($_GET['verify'])) {
 							if (isset($_POST['update_city'])) {
 								$_POST['update_city'] = htmlspecialchars($_POST['update_city']);
@@ -99,13 +95,11 @@
 								throw new Exception('Error : Le nom de ville n\'est pas correct !');
 							}
 						} else {
-							require ('view/update-city.php');
+							open('updateCity');
 						}
 					} else if (isset($_GET['pass'])) {
 						if (isset($_GET['redir'])) {
-							$message = 'Votre mot de passe a bien été modifié !';
-							require ('view/action-confirm.php');
-							header('refresh:5;url=index.php?action=open&app');
+							redirWTime('Votre mot de passe a bien été modifié !', 3, 'index.php?action=open&app');
 						}
 						else if (isset($_GET['verify'])) {
 							if (isset($_POST['old_pass']) && isset($_POST['update_pass']) && isset($_POST['update_passRep'])) {
@@ -117,16 +111,14 @@
 								throw new Exception('Error : Le formulaire n\'est pas complet, ou les données ne sont pas identiques !');
 							}
 						} else {
-							require ('view/update-password.php');
+							open('updatePass');
 						}
 					} else {
-						header ('Location: index.php?action=open&app');
+						redir('index.php?action=open&app');
 					}	
 				} else if ($_GET['action'] == 'upload') {
 					if (isset($_GET['redir'])) {
-							$message = 'Votre avatar a bien été modifié !';
-							require ('view/action-confirm.php');
-							header('refresh:3;url=index.php?action=open&app');
+							redirWTime('Votre avatar a bien été modifié !', 3, 'index.php?action=open&app');
 					} else if (isset($_GET['verify'])) {
 						if (isset($_FILES['avatar']) AND !empty($_FILES['avatar']['name'])){
 							upload();
@@ -134,7 +126,7 @@
 							throw new Exception('Erreur : Aucun fichier à uploader !');
 						}
 					} else {
-						require ('view/upload.php');
+						open('upload');
 					}
 				} else if ($_GET['action'] == 'expert') {
 					if (isset($_GET['purchase'])) {
@@ -144,8 +136,10 @@
 							throw new Exception('Error : Vous devez être connecté !');
 						}
 					} else {
-						require ('view/index.php');
+						home();
 					}
+				} else {
+					throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
 				}
 			} else {
 				throw new Exception('Erreur : L\'url recherchée n\'existe pas !');
@@ -155,6 +149,6 @@
 		}
 	} catch(Exception $e) {
         $errorMessage = $e->getMessage();
-        require('view/error.php');
+        openErrorView($errorMessage);
     }
 ?>

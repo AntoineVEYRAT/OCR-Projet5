@@ -1,5 +1,4 @@
 <?php ob_start(); ?>
-
 <div class="content">
 	<div class="session">
 		<h2>

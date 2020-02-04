@@ -2,15 +2,11 @@
 <div class="content">
 	<div class="aConfirm" style="text-align:center;">
 		<p>
-		<?php
+			<?php
 				echo $message;
-		?>
+			?>
 		</p>
-		<p>
-		<?php
-				echo 'Vous allez être redirigé dans quelques secondes ...';
-		?>
-		</p>
+		<p>Vous allez être redirigé dans quelques secondes ...</p>
 	</div>
 </div>
 <?php 
