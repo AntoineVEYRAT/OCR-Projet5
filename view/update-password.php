@@ -2,13 +2,11 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>CHANGEMENT DE MOT DE PASSE</h3>
+			<h2>CHANGEMENT DE MOT DE PASSE</h2>
 			<br>
 			<label>Identifiant</label>
 			<h3>
-				<?php 
-					echo $_SESSION['name']; 
-				?>
+				<?= $_SESSION['name']; ?>
 			</h3>
 			<br>
 			<form action="index.php?action=update&pass&verify" method="post" class="update_pass_form" name="update_pass">

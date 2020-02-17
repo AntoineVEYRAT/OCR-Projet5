@@ -2,12 +2,14 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>AJOUT D'UN AVATAR</h3>
+			<h2>AJOUT D'UN AVATAR</h2>
 			<br>
 			<label>Avatar actuel</label>
 				<?php 
 					if(isset($_SESSION['img'])):
-						echo '<img src="./storage/img/' . $_SESSION['img'] . '" alt="' . $_SESSION['img'] . '" width="100px" height="120px"/>';
+						?>
+							<img src="./storage/img/<?= $_SESSION['img'] ?>" alt="<?= $_SESSION['img'] ?>" />
+						<?php
 					else:
 				?>
 						<img src="./storage/img/default.png" alt="default_avatar" />
@@ -17,8 +19,8 @@
 			<br>
 			<form action="index.php?action=upload&verify" method="post" class="upload_form" enctype="multipart/form-data">
 				<div class="session">
+					<label for="upload">Ajout nouvel avatar</label>
 					<input type="file" name="avatar" id="upload" required>
-
 				</div>
 				<div class="session">
 					<label class="button-form">Changer<input type="submit" value="Upload" class="input-form"></label>

@@ -2,10 +2,10 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>CHANGEMENT DE VILLE</h3>
+			<h2>CHANGEMENT DE VILLE</h2>
 			<br>
 			<label>Ville actuelle</label>
-			<h3><?php echo $_SESSION['city']; ?></h3>
+			<h3><?=  $_SESSION['city']; ?></h3>
 			<br>
 			<form action="index.php?action=update&city&verify" method="post" class="update_city_form" name="update_city">
 				<div class="session">

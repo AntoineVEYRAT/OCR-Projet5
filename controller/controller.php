@@ -109,9 +109,7 @@
 					header('Location: index.php?action=open&app');
 				}
 			} else {
-				$message = 'Désolé, vous avez atteint le nombre maximal de note !';
-				require ('view/action-confirm.php');
-				header('refresh:3;url=index.php?action=open&app');
+				header('Location: index.php?action=ticket&failed');
 			}
 		}
 		
@@ -311,6 +309,7 @@
 		} else {
 			$_SESSION['status'] = 1;
 			$_SESSION['expStop'] = date('Y-m-d', strtotime("+14 day"));
+			redirWTime('Vous avez rejoin le groupe des pêcheurs experts pendant 15jours !', 5, 'index.php?action=open&app');
 		}
 	}
 
@@ -342,15 +341,15 @@
 	}
 
 		// REDIRECTION
-	function redir($url) {
-		header ('Location: ' . $url .'');
+	function redirApp() {
+		header ('Location: index.php?action=open&app');
 	}
 
-		// REDIRECTION WITH TIME
+		// ACTION CONFIRM
 	function redirWTime($text, $time, $url) {
+		header ('refresh:'. $time .';url='. $url .'');
 		$message = $text;
-		require('view/action-confirm.php');
-		header('refresh:'. $time .';url='. $url .'');
+		require ('view/action-confirm.php');
 	}
 
 		// REDIRECTION ERROR VIEW

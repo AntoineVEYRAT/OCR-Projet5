@@ -63,8 +63,9 @@
 					</div>
 					<div class="about-us-text">
 						<h2>ABOUT US</h2>
-						<p>Hae duae provinciae bello quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub iugum factae sunt vectigales. et hae quidem regiones velut in prominenti terrarum lingua positae ob orbe eoo monte Amano disparantur.Denique Antiochensis ordinis vertices sub uno elogio iussit occidi ideo efferatus, quod ei celebrari vilitatem intempestivam urgenti, cum inpenderet inopia, gravius rationabili responderunt; et perissent ad unum ni comes orientis tunc Honoratus fixa constantia restitisset.</p>
-						<p>Hae duae provinciae bello quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub iugum factae sunt vectigales. et hae quidem regiones velut in prominenti terrarum lingua positae ob orbe eoo monte Amano disparantur.</p>
+						<p>How I Fish est une application innovante, destinée aux pêcheurs, expérimentés ou occasionnels, leurs permettant d'accèder en temps réel à une note reflettant le niveau de pêchabilité.</p>
+						<p>En effet, notre algorythme actuel prend en considération toutes les conditions nécessaires à cette pratique, et effectue une série de calculs afin de vous exposer une indication de pêchabilité précise.</p>
+						<p>Nous sommes fiers de vous proposer ce service gratuitement, et nous vous proposons d'exploiter son contenu dans son intégralité grâce au statut du pêcheur Expert. En outre, vous aurez accès à des fonctionnalités supplémentaires.</p>
 					</div>
 				</div>
 			</section>
@@ -113,8 +114,8 @@
 					<div class="stats-bar">
 						<img src="./public/img/fishing-ico.png" alt="icon-fisher" />
 						<h4>  
-							<?php 
-								echo $result; 
+							<?=
+								$result; 
 							?> 
 							pêcheurs utilisent déjà l'application
 						</h4>

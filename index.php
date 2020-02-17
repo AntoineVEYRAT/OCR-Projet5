@@ -72,8 +72,10 @@
 						} else {
 							throw new Exception('Error : Désolé, ce ticket n\'existe pas !');
 						}
+					} else if (isset($_GET['failed'])){
+						redirWTime('Désolé, vous avez atteint le nombre maximal de note !', 3, 'index.php?action=open&app');
 					} else {
-						redir('Location: index.php?action=open&app');
+						redirApp();
 					}
 						
 				} else if ($_GET['action'] == 'logout') {
@@ -114,7 +116,7 @@
 							open('updatePass');
 						}
 					} else {
-						redir('index.php?action=open&app');
+						redirApp();
 					}	
 				} else if ($_GET['action'] == 'upload') {
 					if (isset($_GET['redir'])) {

@@ -5,9 +5,7 @@
 			<h3>Confirmez votre choix</h3>
 		</div>
 		<div class="confirm-zone">
-			<?php
-				echo '<a href="index.php?action=ticket&delete&confirm&id=' . $idTicket . '" class="yes">OUI</a>';
-			?>
+			<a href="index.php?action=ticket&delete&confirm&id=<?= $idTicket ?>" class="yes">OUI</a>
 		</div>
 		<div class="confirm-zone">
 			<a href="index.php?action=open&app" class="back">Retour</a>		

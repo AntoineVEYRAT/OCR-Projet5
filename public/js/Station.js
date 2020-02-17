@@ -132,7 +132,7 @@ class Station{
 
                 let result = ((Number(tempN) + Number(precipN) + Number(weatherCodeN) + Number(windSpeedN) + Number(visibN))/5)/2
 
-                document.getElementById('resultWeather').textContent = result.toFixed(1);
+                document.getElementById('resultWeather').textContent = (Number(result)).toFixed(1) + "/10";
                 document.getElementById('resultCityName').textContent = weather.location.name;
                 document.getElementById('resultCountryName').textContent = weather.location.country;
 

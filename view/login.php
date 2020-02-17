@@ -2,7 +2,7 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>CONNEXION</h3>
+			<h2>CONNEXION</h2>
 			<br>
 			<form action="index.php?action=login&amp;verify" method="post" class="login-form" name="login">
 				<div class="session">

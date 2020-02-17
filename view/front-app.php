@@ -2,13 +2,15 @@
 <div class="appli-content">
 	<div id="tickets">
 		<div class="ticket noteform">
-			<h5>Rédigez une note</h5>
+			<h2>Rédigez une note</h2>
 			<form method="POST" action="index.php?action=ticket&add">
-				<textarea id="ticket" name="ticket" rows="5" cols="35" maxlength="100"></textarea>
+				<label for="ticket">
+					<textarea id="ticket" name="ticket" rows="5" cols="35" maxlength="100">J'écris une note...</textarea>
+				</label>
 				<br>
-				<label>
+				<label for="submit-ticket">
 					<i class="fas fa-save fa-2x submit"></i>
-					<input type="submit" />
+					<input type="submit" id="submit-ticket" />
 				</label>
 			</form>
 		</div>
@@ -19,18 +21,17 @@
 			?>
 						<div class="ticket-write" >
 							<p>
-								<?php 
-									echo $ticket['date'];
+								<?= 
+									$ticket['date'];
 								?>
 							</p>
 							<p>
-								<?php 
-									echo $ticket['text'];
+								<?= 
+									$ticket['text'];
 								?>
 							</p>
-							<?php
-								echo '<a href="index.php?action=ticket&delete&id=' . $ticket['id'] . '">';
-							?>
+							
+								<a href="index.php?action=ticket&delete&id=<?= $ticket['id'] ?>">
 									<div class="cross">
 										<i class="fas fa-trash-alt"></i>
 									</div>
@@ -42,7 +43,7 @@
 				else:
 				?>
 					<div class="ticket-write" >
-						<p>Vous n\'avez aucune note.</p>
+						<p>Vous n'avez aucune note.</p>
 						<div class="arrow-down"></div>
 					</div>';
 			<?php
@@ -52,9 +53,13 @@
 			<?php
 				for($i=1; $i<=(ceil($nbTicket/3)); $i++):
 					if($i == $currentPage):
-						echo '<div class="square square-current"><p>' . $i . '</p></div>';
+						?>
+							<div class="square square-current"><p><?= $i ?></p></div>
+						<?php
 					else:
-						echo '<a href="?action=open&app&page=' . $i . '"><div class="square square-hover">' . $i . '</div></a> ';
+						?>
+							<a href="?action=open&app&page=<?= $i ?>"><div class="square square-hover"><?= $i ?></div></a>
+						<?php
 					endif;
 				endfor;
 			?>
@@ -69,13 +74,14 @@
 			?>
 					<img src="./public/img/check.png" alt="check" />
 					<br>
-					<p>Vous êtes un pêcheur <span class="yellow">Expert</span> !</p><br>';
+					<p>Vous êtes un pêcheur <span class="yellow">Expert</span> !</p>
+					<br>
 					<p>Date de fin :</p>
 					<p>
-				<?php
+					<?php
 						$date = DateTime::createFromFormat('Y-m-d', $_SESSION['expStop']);
 						echo $date->format('d-m-Y');
-				?>
+					?>
 					</p>
 			<?php
 				elseif($_SESSION['status'] == 2):
@@ -96,9 +102,11 @@
 		</div>
 		<div class="note-module modules">
 			<p>Aujourd'hui, l'indice de pêche est de :</p>
-			<h5><span id="resultWeather"></span>/10</h5>
-			<p><span id="resultCityName"></span></p>
-			<p>(<span id="resultCountryName"></span>)</p>
+			<h3 id="resultWeather">Note</h3>
+			<div>
+				<p id="resultCityName"></p>
+				<p id="resultCountryName"></p>
+			</div>
 		</div>
 		<div class="expert-module modules">
 			<?php 
@@ -106,15 +114,19 @@
 			?>	
 				<div class="expert-stats">
 					<h3 class="yellow">Les indices d'expert</h3>
-					<p><span class="stat"><i class="fas fa-2x fa-cloud-sun"></i></span> <span id="weather"></span></p>
-					<p><span class="stat"><i class="fas fa-2x fa-thermometer-three-quarters"></i></span> <span id="temp"></span></p>
-					<p><span class="stat"><i class="fas fa-2x fa-wind"></i></span> <span id="wind"></span></p>
-					<p><span class="stat"><i class="fas fa-2x fa-cloud-rain"></i></span> <span id="rain"></span></p>
-					<p><span class="stat"><i class="fas fa-2x fa-eye"></i></span> <span id="visibility"></span></p>
+					<ul>
+						<li><span class="stat"><i class="fas fa-2x fa-cloud-sun"></i></span> <p id="weather"></p></li>
+						<li><span class="stat"><i class="fas fa-2x fa-thermometer-three-quarters"></i></span> <p id="temp"></p></li>
+						<li><span class="stat"><i class="fas fa-2x fa-wind"></i></span> <p id="wind"></p></li>
+						<li><span class="stat"><i class="fas fa-2x fa-cloud-rain"></i></span> <p id="rain"></p></li>
+						<li><span class="stat"><i class="fas fa-2x fa-eye"></i></span> <p id="visibility"></p></li>
+					</ul>
 				</div>
 			<?php
 				else:
-					echo '<p>Vous n\'êtes pas pêcheur Expert !</p><p><a href="index.php#offers-bar">Devenir pêcheur Expert !</a></p>';
+					?>
+						<p>Vous n'êtes pas pêcheur Expert !</p><p><a href="index.php#offers-bar">Devenir pêcheur Expert !</a></p>
+					<?php
 				endif;
 			?>
 		</div>
@@ -122,20 +134,16 @@
 			<h3>PROFILE</h3>
 			<br>
 			<div id="avatar">
-				<?php 
-						echo '<img src="/storage/img/' . $_SESSION['img'] . '" alt="' . $_SESSION['img'] . '" />';
-						echo '<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>';
-				?>
+				<img src="/storage/img/<?= $_SESSION['img'] ?>" alt="<?= $_SESSION['img'] ?>" />
+				<div class="hover-hidden"><a href="index.php?action=upload">Changer</a></div>
 			</div>
 			<br>
 			<div class="desc">
-				<?php 
-					echo '<p>Identifiant : ' . $_SESSION['name'] . '</p>';
-					echo '<p>Email : ' . $_SESSION['email'] . '</p>';
-					echo '<p>Ville : <span id="city">' . $_SESSION['city'] . '</span> (<a href="index.php?action=update&city">Changer</a>)</p>';
-					echo'<span id="city_error"></span>';
-					echo '<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>';
-				?>
+				<p>Identifiant : <?= $_SESSION['name'] ?></p>
+				<p>Email : <?= $_SESSION['email'] ?></p>
+				<p>Ville : <span id="city"><?= $_SESSION['city'] ?></span> (<a href="index.php?action=update&city">Changer</a>)</p>
+				<span id="city_error"></span>
+				<p>Mot de passe (<a href="index.php?action=update&pass">Changer</a>)</p>
 			</div>
 			<br>
 			<a href="index.php?action=logout">Se déconnecter</a>
@@ -144,7 +152,7 @@
 </div>
 <script src="./public/js/AjaxGet.js"></script>
 <script src="./public/js/Station.js"></script>
-<script type="text/javascript">
+<script>
 	const city = document.getElementById('city').innerHTML;
 	let currentWeather = new Station(city);
 	currentWeather.requetExist();

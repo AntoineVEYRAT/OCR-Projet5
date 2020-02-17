@@ -2,7 +2,7 @@
 <div class="content">
 	<section>
 		<div class="session">
-			<h3>INSCRIPTION</h3>
+			<h2>INSCRIPTION</h2>
 			<br>
 			<form action="index.php?action=subscribe&verify" method="post" class="subscribe-form" name="subscribe">
 				<div class="session">
@@ -11,7 +11,7 @@
 					<span id="subscribe_name_error"></span>
 				</div>
 				<div class="session">
-					<label for="subscribe_mail">Email</label>
+					<label for="subscribe_email">Email</label>
 					<input type="text" minlength="8" name="subscribe_mail" id="subscribe_email" required>
 					<span id="subscribe_email_error"></span>
 				</div>

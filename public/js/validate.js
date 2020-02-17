@@ -53,7 +53,7 @@ document.getElementById("submit").addEventListener('click', function(event){
 				document.getElementById(form+city+error).textContent = '3 caractères min.';
 				document.getElementById(form+city+error).style.color = 'yellow';
 			} else {
-				let accept = new RegExp("[^a-zA-Z]");
+				let accept = new RegExp("[^a-zA-Z\\-\\s]");
 				if (accept.test(document.getElementById(form+city).value) == true) {
 					event.preventDefault();
 					document.getElementById(form+city+error).textContent = 'Caractères spcéciaux interdit';
@@ -69,7 +69,7 @@ document.getElementById("submit").addEventListener('click', function(event){
 			document.getElementById("update_city_error").textContent = '3 caractères min.';
 			document.getElementById("update_city_error").style.color = 'yellow';
 		} else {
-			let accept = new RegExp("[^a-zA-Z]");
+			let accept = new RegExp("[^a-zA-Z\\-\\s]");
 			if (accept.test(document.getElementById("update_city").value) == true) {
 				event.preventDefault();
 				document.getElementById("update_city_error").textContent = 'Caractères spcéciaux interdit';
